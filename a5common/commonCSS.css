@@ -1,0 +1,12 @@
+/* 全局CSS */
+
+/* 左侧鼠标悬浮变色 */
+.mdui-list-item:hover{
+    color:rgb(66, 139, 219);
+    background-color:rgb(231, 246, 254);
+}
+
+/* 主内容框内边距 */
+.content{
+    padding: 40px 20px;
+}
