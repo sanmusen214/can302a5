@@ -161,7 +161,7 @@
     </div>
 </body>
 <!-- 这个页面的JS，放在文档尾部 -->
-<script src="a5common/commonJS.js"></script>
+<script src="a5common/commonJS.js?<?php echo rand(1,999999) ?>"></script>
 <script>
  
 </script>
