@@ -29,26 +29,34 @@
     }
     // 侧边框
     function siderbarUI(){
+        $nowurl=$_SERVER["REQUEST_URI"];
+        $product=strpos($nowurl,"product")?"lefthighlight":"";
+        $category=strpos($nowurl,"category")?"lefthighlight":"";
+        $user=strpos($nowurl,"user")?"lefthighlight":"";
+        $order=strpos($nowurl,"order")?"lefthighlight":"";
+        $coupon=strpos($nowurl,"coupon")?"lefthighlight":"";
+
+
         echo '
         <div class="mdui-drawer" id="siderbar">
             <ul class="mdui-list">
-            <li class="mdui-list-item mdui-ripple" onclick="window.location=`a5product.php`;">
+            <li class="mdui-list-item mdui-ripple '.$product.'" onclick="window.location=`a5product.php`;">
                 <i class="mdui-icon material-icons">class</i>
                 <div class="mdui-list-item-content">&nbsp Product</div>
             </li>
-            <li class="mdui-list-item mdui-ripple" onclick="window.location=`a5category.php`;">
+            <li class="mdui-list-item mdui-ripple '.$category.'" onclick="window.location=`a5category.php`;">
                 <i class="mdui-icon material-icons">apps</i>
                 <div class="mdui-list-item-content">&nbsp Category</div>
             </li>
-            <li class="mdui-list-item mdui-ripple" onclick="window.location=`a5user.php`;">
+            <li class="mdui-list-item mdui-ripple '.$user.'" onclick="window.location=`a5user.php`;">
                 <i class="mdui-icon material-icons">person</i>
                 <div class="mdui-list-item-content">&nbsp User</div>
             </li>
-            <li class="mdui-list-item mdui-ripple" onclick="window.location=`a5order.php`;">
+            <li class="mdui-list-item mdui-ripple '.$order.'" onclick="window.location=`a5order.php`;">
                 <i class="mdui-icon material-icons">assignment</i>
                 <div class="mdui-list-item-content">&nbsp Order</div>
             </li>
-            <li class="mdui-list-item mdui-ripple" onclick="window.location=`a5coupon.php`;">
+            <li class="mdui-list-item mdui-ripple '.$coupon.'" onclick="window.location=`a5coupon.php`;">
                 <i class="mdui-icon material-icons">card_giftcard</i>
                 <div class="mdui-list-item-content">&nbsp Coupon</div>
             </li>

@@ -10,3 +10,9 @@
 .content{
     padding: 40px 20px;
 }
+
+/* 左侧标签栏常亮 */
+.lefthighlight{
+    color:rgb(66, 139, 219);
+    background-color: rgb(231, 246, 254);
+}

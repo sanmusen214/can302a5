@@ -23,7 +23,9 @@
         echo "<td>".$row["Payment_Method"]."</td>";
         echo "<td>".$row["Shipping_Address"]."</td>";
         echo "<td>
-            <button onclick='location.href=`a5useredit.php?id=$rowid`' class='mdui-btn mdui-color-teal-500'>Edit</button>
+            <button onclick='location.href=`a5useredit.php?id=$rowid`' class='mdui-btn mdui-btn-icon mdui-color-teal-500'>
+                <i class='mdui-icon material-icons'>brush</i>
+            </button>
             <button onclick='location.href=`a5useredit.php?deleteid=$rowid`' class='mdui-btn mdui-btn-icon mdui-color-red-500'>
                 <i class='mdui-icon material-icons'>delete</i>
             </button>
