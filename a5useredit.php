@@ -11,20 +11,21 @@
         'Shipping_Address'=>''
     );
     // 查询数据库，获得数据库里这行的内容
+    // myget获取url里的参数,根据不同的参数渲染默认值
     if(myget("id")){
-        // 更新模式，对应按钮值update
+        // 设为更新模式，对应按钮值update
         $mode="update";
         $urlid=myget("id");
         // 查询原先数据
         $sql = "SELECT * FROM user WHERE `User_ID`='$urlid'";
         $query = $con->query($sql);
-        // 得到第一条结果
+        // 得到查询结果,待会放入表单内显示
         $myrow=$query->fetch();
     }else if(myget("create")){
-        // 新建模式，对应按钮值create
+        // 设为新建模式，对应按钮值create
         $mode="create";
     }else if(myget("deleteid")){
-        // 删除模式，对应按钮值delete
+        // 设为删除模式，对应按钮值delete
         $mode="delete";
         $urlid=myget("deleteid");
         // 查询原先数据
@@ -34,7 +35,7 @@
         $myrow=$query->fetch();
     }
 
-    // 接受表单内用户填写的参数
+    // 当用户点按钮提交表单时,接受表单内用户填写的参数
     $userid = mypost('User_ID');
     $username = mypost('User_Name');
     $userphone = mypost('Telephone');
@@ -42,7 +43,7 @@
     $useraddress = mypost('Shipping_Address');
 
     if(isset($_POST['update'])){
-        // 如果点击upload按钮值是update
+        // 如果点击按钮值是update,更行那行数据
         $sql = "
         UPDATE `user` SET 
         `User_Name` = '$username', 
@@ -55,7 +56,7 @@
         header("Location:./a5user.php");
         exit();
     }else if(isset($_POST['create'])){
-        //如果点击upload按钮值是create
+        //如果点击按钮值是create,插入新数据
         $sql = "
         INSERT INTO `user` (`User_ID`, `User_Name`, `Telephone`, `Payment_Method`, `Shipping_Address`) VALUES (NULL, '$username', '$userphone', '$userpayment','$useraddress')";
         $con->exec($sql);
@@ -63,7 +64,7 @@
         header("Location:./a5user.php");
         exit();
     }else if(isset($_POST['delete'])){
-        //如果点击upload按钮值是delete
+        //如果点击按钮值是delete
         // 将deleted字段设置为true
         $sql = "UPDATE `user` SET `deleted` = TRUE WHERE `User_ID` = '$userid'";
         $con->exec($sql);
@@ -85,6 +86,7 @@
     <link rel="stylesheet" href="a5common/commonCSS.css">
     <!-- 这个页面css，这会覆盖外链引入的样式 -->
     <style>
+        /* 限制input长度 */
         .content form input{
             width:60%;
         }
@@ -114,7 +116,7 @@
                 <div class="mdui-col-xs-9">
                     <input readonly type="text" class="form-control" id="User_ID" placeholder="User ID" name="User_ID" value="<?php echo $myrow['User_ID']; ?>">
                 </div>
-                <!-- value字段对应默认值 -->
+                <!-- value字段填对应的查询到的原先的值 -->
                 
                 <div class="mdui-col-xs-3">User_Name:</div>
                 <div class="mdui-col-xs-9">
@@ -124,7 +126,7 @@
                 
                 <div class="mdui-col-xs-3">Telephone:</div>
                 <div class="mdui-col-xs-9">
-                    <input required pattern="^\d{11}$" type="text" onInput="checkit(this)" class="form-control" id="Telephone" placeholder="Input Telephone" name="Telephone" value="<?php echo $myrow['Telephone']; ?>">
+                    <input required pattern="^\d{11}$" type="text" onInput="checkit(this,'you need to fill 11 numbers')" class="form-control" id="Telephone" placeholder="Input Telephone" name="Telephone" value="<?php echo $myrow['Telephone']; ?>">
                 </div>
 
                 <div class="mdui-col-xs-3">Payment_Method:</div>
@@ -154,7 +156,7 @@
                 <div class="mdui-col-xs-9">
                     <input required type="text" class="form-control" id="Shipping_Address" placeholder="Input Shipping_Address" name="Shipping_Address" value="<?php echo $myrow['Shipping_Address']; ?>">
                 </div>
-
+                <!-- 按钮内容和name随着$mode的值变化,从而实现不同的添加修改删除效果 -->
                 <button  style="text-transform:capitalize;" type="submit" class="btn btn-primary" id="<?php echo $mode ?>" name="<?php echo $mode ?>" value="<?php echo $mode ?>"> <?php echo $mode ?> </button>
             </form>
         </div>

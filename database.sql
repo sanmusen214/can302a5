@@ -115,7 +115,7 @@ CREATE TABLE `product` (
 CREATE TABLE `user` (
   `User_ID` int(16) NOT NULL AUTO_INCREMENT,
   `User_Name` varchar(32) NOT NULL,
-  `Telephone` int(16) NOT NULL,
+  `Telephone` varchar(16) NOT NULL,
   `Payment_Method` varchar(16) NOT NULL,
   `Shipping_Address` varchar(100) NOT NULL,
   `deleted` boolean DEFAULT FALSE NOT NULL,

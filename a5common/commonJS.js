@@ -28,3 +28,21 @@ function findWhichAreSelected(){
     }
     return reslist
 }
+
+/**
+ * @param obj this 对象
+ * @param remindword str 不符合pattern的话提醒的字符串
+ */
+function checkit(obj, remindword) {
+    console.log(obj.validity);
+    const it = obj.validity;
+    if (it.valueMissing === true) {
+        obj.setCustomValidity("It is required");
+    } else {
+        if (it.patternMismatch === true) {
+            obj.setCustomValidity(remindword);
+        }else{
+            obj.setCustomValidity('');
+        }
+    }
+}
