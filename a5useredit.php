@@ -20,8 +20,8 @@
         $query = $con->query($sql);
         // 得到第一条结果
         $myrow=$query->fetch();
-    }else if(myget("add")){
-        // 新建模式，对应按钮值add
+    }else if(myget("create")){
+        // 新建模式，对应按钮值create
         $mode="create";
     }else if(myget("deleteid")){
         // 删除模式，对应按钮值delete
@@ -85,7 +85,9 @@
     <link rel="stylesheet" href="a5common/commonCSS.css">
     <!-- 这个页面css，这会覆盖外链引入的样式 -->
     <style>
-
+        .content form input{
+            width:60%;
+        }
     </style>
     <!-- 引入jquery和boostrap，mdui -->
     <script src="js/jquery-331.min.js"></script>
@@ -106,23 +108,52 @@
     <div class="content">
         <h1 style="text-transform:capitalize;"><?php echo $mode ?></h1>
         <div class="mdui-container">
-            <form class="form-inline" role="form" action="" method="post" >
+            <form class="" role="form" action="" method="post" >
                 <div class="mdui-col-xs-3">User_ID:</div>
                 <!-- 此处id限制为readonly -->
-                <div class="mdui-col-xs-9"><input readonly type="text" class="form-control" id="User_ID" placeholder="User ID" name="User_ID" value="<?php echo $myrow['User_ID']; ?>"></div>
+                <div class="mdui-col-xs-9">
+                    <input readonly type="text" class="form-control" id="User_ID" placeholder="User ID" name="User_ID" value="<?php echo $myrow['User_ID']; ?>">
+                </div>
                 <!-- value字段对应默认值 -->
                 
                 <div class="mdui-col-xs-3">User_Name:</div>
-                <div class="mdui-col-xs-9"><input type="text" class="form-control" id="User_Name" placeholder="Input User name" name="User_Name" value="<?php echo $myrow['User_Name']; ?>"></div>
+                <div class="mdui-col-xs-9">
+                    <!-- required必填字段 -->
+                    <input required type="text" class="form-control" id="User_Name" placeholder="Input User name" name="User_Name" value="<?php echo $myrow['User_Name']; ?>">
+                </div>
                 
                 <div class="mdui-col-xs-3">Telephone:</div>
-                <div class="mdui-col-xs-9"><input type="text" class="form-control" id="Telephone" placeholder="Input Telephone" name="Telephone" value="<?php echo $myrow['Telephone']; ?>"></div>
+                <div class="mdui-col-xs-9">
+                    <input required pattern="^\d{11}$" type="text" onInput="checkit(this)" class="form-control" id="Telephone" placeholder="Input Telephone" name="Telephone" value="<?php echo $myrow['Telephone']; ?>">
+                </div>
 
                 <div class="mdui-col-xs-3">Payment_Method:</div>
-                <div class="mdui-col-xs-9"><input type="text" class="form-control" id="Payment_Method" placeholder="Input Payment_Method" name="Payment_Method" value="<?php echo $myrow['Payment_Method']; ?>"></div>
+                <div class="mdui-col-xs-9">
+                <!-- 单选框 -->
+                <select class="mdui-select" name="Payment_Method">
+                    <option value="Wechat" <?php 
+                    $isselect=$myrow['Payment_Method']="Wechat"?"selected":"";
+                    echo $isselect;
+                    ?>>Wechat</option>
+                    <option value="Alipay" <?php 
+                    $isselect=$myrow['Payment_Method']="Alipay"?"selected":"";
+                    echo $isselect;
+                    ?>>Alipay</option>
+                    <option value="VISA" <?php 
+                    $isselect=$myrow['Payment_Method']="VISA"?"selected":"";
+                    echo $isselect;
+                    ?>>VISA</option>
+                    <option value="MASTERCARD" <?php 
+                    $isselect=$myrow['Payment_Method']="MASTERCARD"?"selected":"";
+                    echo $isselect;
+                    ?>>MASTERCARD</option>
+                </select>    
+                </div>
 
                 <div class="mdui-col-xs-3">Shipping_Address:</div>
-                <div class="mdui-col-xs-9"><input type="text" class="form-control" id="Shipping_Address" placeholder="Input Shipping_Address" name="Shipping_Address" value="<?php echo $myrow['Shipping_Address']; ?>"></div>
+                <div class="mdui-col-xs-9">
+                    <input required type="text" class="form-control" id="Shipping_Address" placeholder="Input Shipping_Address" name="Shipping_Address" value="<?php echo $myrow['Shipping_Address']; ?>">
+                </div>
 
                 <button  style="text-transform:capitalize;" type="submit" class="btn btn-primary" id="<?php echo $mode ?>" name="<?php echo $mode ?>" value="<?php echo $mode ?>"> <?php echo $mode ?> </button>
             </form>
@@ -132,6 +163,6 @@
 <!-- 这个页面的JS，放在文档尾部 -->
 <script src="a5common/commonJS.js"></script>
 <script>
-    
+ 
 </script>
 </html>

@@ -5,7 +5,7 @@ function clickSomething(){
     window.alert("你点击了这个东西");
 }
 
-// 侧边栏对象
+// 获取侧边栏对象
 const siderbar=new mdui.Drawer("#siderbar")
 function toggleSiderbar(){
     // 展开/关闭侧边栏
@@ -14,6 +14,7 @@ function toggleSiderbar(){
 
 // 找到勾选了列表里的哪些行
 function findWhichAreSelected(){
+    console.log("列表哪些行被勾了")
     const selectablelist=document.querySelector(".mdui-table-selectable")
     const reslist=[]
     for(let eachrow of selectablelist.querySelector("tbody").children){

@@ -32,7 +32,7 @@
             </td>";
     }
     // 定义表格右上角加号跳转目的地
-    $myaddtarget="a5useredit.php?add=1";
+    $myaddtarget="a5useredit.php?create=1";
 
 ?>
 
