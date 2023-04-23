@@ -35,6 +35,7 @@ CREATE TABLE `admin` (
   `Admin_Password` varchar(32) NOT NULL,
   `Status` tinyint(1) NOT NULL,
   `Permission` varchar(16) NOT NULL,
+  `deleted` boolean DEFAULT FALSE NOT NULL,
   PRIMARY KEY (`Admin_ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -48,6 +49,7 @@ CREATE TABLE `category` (
   `Category_ID` int(16) NOT NULL AUTO_INCREMENT,
   `Category_Name` varchar(32) NOT NULL,
   `Description` varchar(100) NOT NULL,
+  `deleted` boolean DEFAULT FALSE NOT NULL,
   PRIMARY KEY (`Category_ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -64,6 +66,7 @@ CREATE TABLE `coupon` (
   `Create_Time` timestamp NULL DEFAULT NULL ON UPDATE current_timestamp(),
   `Expire_Time` timestamp NULL DEFAULT current_timestamp(),
   `Coupon_Status` int(1) NOT NULL,
+  `deleted` boolean DEFAULT FALSE NOT NULL,
   PRIMARY KEY (`Coupon_ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -81,6 +84,7 @@ CREATE TABLE `orders` (
   `Order_Status` int(1) NOT NULL,
   `Order_Time` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `Order_Details` varchar(200) NOT NULL,
+  `deleted` boolean DEFAULT FALSE NOT NULL,
   PRIMARY KEY (`Order_ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -98,6 +102,7 @@ CREATE TABLE `product` (
   `Product_Price` double(6,2) NOT NULL,
   `Product_Description` varchar(200) NOT NULL,
   `Product_Image_link` varchar(100) NOT NULL,
+  `deleted` boolean DEFAULT FALSE NOT NULL,
   PRIMARY KEY (`Product_ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -113,6 +118,7 @@ CREATE TABLE `user` (
   `Telephone` int(16) NOT NULL,
   `Payment_Method` varchar(16) NOT NULL,
   `Shipping_Address` varchar(100) NOT NULL,
+  `deleted` boolean DEFAULT FALSE NOT NULL,
   PRIMARY KEY (`User_ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 

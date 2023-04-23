@@ -3,8 +3,8 @@
     require_once "a5common/commonUI.php";
 
 
-    // 定义查询语句
-    $usersql='SELECT * FROM user';
+    // 定义查询语句，只找deleted字段为TRUE的那些数据
+    $usersql='SELECT * FROM user WHERE `deleted`=FALSE';
     // 定义表头数据，这个名字最好不要重复，比如user页面的表头的变量名为userhead，那么order页面的这个变量名就可以是orderhead
     $userhead='
                 <th>Id</th>

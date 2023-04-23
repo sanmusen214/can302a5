@@ -64,7 +64,8 @@
         exit();
     }else if(isset($_POST['delete'])){
         //如果点击upload按钮值是delete
-        $sql = "DELETE FROM `user` WHERE `User_ID` = '$userid'";
+        // 将deleted字段设置为true
+        $sql = "UPDATE `user` SET `deleted` = TRUE WHERE `User_ID` = '$userid'";
         $con->exec($sql);
         // 网页跳转到
         header("Location:./a5user.php");
