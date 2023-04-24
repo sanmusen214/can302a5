@@ -91,11 +91,20 @@
         $valuelist=$config["valuelist"];
         $defaultvalue=isset($config["defaultvalue"])?$config["defaultvalue"]:"";
 
-        echo "<select class='mdui-select' name='Payment_Method'>'";
+        echo "<select class='mdui-select' name='$name'>'";
         foreach($valuelist as $value){
             $isselect=$defaultvalue==$value?'selected':'';
             echo "<option value='$value' $isselect>$value</option>";
         }
         echo "</select>";
+    }
+
+
+    // 按钮 name必填
+    function buttonbox($config){
+        $name=$config["name"];
+        $cssclass=isset($config["cssclass"])?$config["cssclass"]:"";
+
+        echo "<button  style='text-transform:capitalize;' type='submit' class='btn btn-primary $cssclass' id='$name' name='$name' value='$name'> $name </button>";
     }
 ?>
