@@ -45,7 +45,7 @@
             UPDATE `category` SET 
             `Category_Name` = '$categoryName', 
             `Category_Status` = '$categoryStatus', 
-            `Description` = '$categoryDescription', WHERE `Category_ID` = '$categoryID'
+            `Description` = '$categoryDescription' WHERE `Category_ID` = '$categoryID'
             ";
             $con->exec($sql);
             // 网页跳转到
