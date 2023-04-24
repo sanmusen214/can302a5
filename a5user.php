@@ -6,6 +6,7 @@
     // 定义查询语句，只找deleted字段为TRUE的那些数据
     $usersql='SELECT * FROM user WHERE `deleted`=FALSE';
     // 定义表头数据，这个名字最好不要重复，比如user页面的表头的变量名为userhead，那么order页面的这个变量名就可以是orderhead
+    // 默认最右含有Operations
     $userhead='
                 <th>Id</th>
                 <th>Name</th>
@@ -32,7 +33,7 @@
             </td>";
     }
     // 定义表格右上角加号跳转目的地
-    $myaddtarget="a5useredit.php?create=1";
+    $useraddtarget="a5useredit.php?create=1";
 
 ?>
 
@@ -69,7 +70,7 @@
     <div class="content">
         <?php
             // 将开头定义的几个东西按顺序传进去，注意第四个参数是函数的名字
-            displayList($con,$usersql,$userhead,"userrender",$myaddtarget);
+            displayList($con,$usersql,$userhead,"userrender",$useraddtarget);
         ?>
     </div>
 </body>
