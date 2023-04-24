@@ -2,7 +2,7 @@
     require_once "a5common/commonPHP.php";
     require_once "a5common/commonUI.php";
 
-    // 表单里的默认值
+    // 表单里的默认值，这一步很重要
     $myrow=array(
         'User_ID'=>'',
         'User_Name'=>'',
@@ -10,46 +10,40 @@
         'Payment_Method'=>'',
         'Shipping_Address'=>''
     );
-    // 查询数据库，获得数据库里这行的内容
+    // 查询数据库，获得数据库里id所在行的内容
     // myget获取url里的参数,根据不同的参数渲染默认值
+    $mode="create";//默认模式为create
     if(myget("id")){
-        // 设为更新模式，对应按钮值update
+        // 如果url参数里有id
+        // 设为更新模式，对应第一个按钮值update
         $mode="update";
         $urlid=myget("id");
         // 查询原先数据
         $sql = "SELECT * FROM user WHERE `User_ID`='$urlid'";
         $query = $con->query($sql);
-        // 得到查询结果,待会放入表单内显示
+        // 得到查询结果,表单默认值
         $myrow=$query->fetch();
     }else if(myget("create")){
-        // 设为新建模式，对应按钮值create
+        // 设为新建模式，对应第一个按钮值create
         $mode="create";
-    }else if(myget("deleteid")){
-        // 设为删除模式，对应按钮值delete
-        $mode="delete";
-        $urlid=myget("deleteid");
-        // 查询原先数据
-        $sql = "SELECT * FROM user WHERE `User_ID`='$urlid'";
-        $query = $con->query($sql);
-        // 得到结果
-        $myrow=$query->fetch();
+        // 表单默认值不做修改
     }
 
     // 当用户点按钮提交表单时,接受表单内用户填写的参数
-    $userid = mypost('User_ID');
-    $username = mypost('User_Name');
-    $userphone = mypost('Telephone');
-    $userpayment = mypost('Payment_Method');
-    $useraddress = mypost('Shipping_Address');
+    $User_ID = mypost('User_ID');
+    $User_Name = mypost('User_Name');
+    $Telephone = mypost('Telephone');
+    $Payment_Method = mypost('Payment_Method');
+    $Shipping_Address = mypost('Shipping_Address');
 
     if(isset($_POST['update'])){
         // 如果点击按钮值是update,更行那行数据
         $sql = "
         UPDATE `user` SET 
-        `User_Name` = '$username', 
-        `Telephone` = '$userphone', 
-        `Payment_Method` = '$userpayment', 
-        `Shipping_Address` = '$useraddress' WHERE `User_ID` = '$userid'
+        `User_Name` = '$User_Name', 
+        `Telephone` = '$Telephone', 
+        `Payment_Method` = '$Payment_Method', 
+        `Shipping_Address` = '$Shipping_Address' WHERE `User_ID` = '$User_ID'
         ";
         $con->exec($sql);
         // 网页跳转到
@@ -58,7 +52,7 @@
     }else if(isset($_POST['create'])){
         //如果点击按钮值是create,插入新数据
         $sql = "
-        INSERT INTO `user` (`User_ID`, `User_Name`, `Telephone`, `Payment_Method`, `Shipping_Address`) VALUES (NULL, '$username', '$userphone', '$userpayment','$useraddress')";
+        INSERT INTO `user` (`User_ID`, `User_Name`, `Telephone`, `Payment_Method`, `Shipping_Address`) VALUES (NULL, '$User_Name', '$Telephone', '$Payment_Method','$Shipping_Address')";
         $con->exec($sql);
         // 网页跳转到
         header("Location:./a5user.php");
@@ -66,7 +60,7 @@
     }else if(isset($_POST['delete'])){
         //如果点击按钮值是delete
         // 将deleted字段设置为true
-        $sql = "UPDATE `user` SET `deleted` = TRUE WHERE `User_ID` = '$userid'";
+        $sql = "UPDATE `user` SET `deleted` = TRUE WHERE `User_ID` = '$User_ID'";
         $con->exec($sql);
         // 网页跳转到
         header("Location:./a5user.php");
@@ -112,52 +106,69 @@
         <div class="mdui-container">
             <form class="" role="form" action="" method="post" >
                 <div class="mdui-col-xs-3">User_ID:</div>
-                <!-- 此处id限制为readonly -->
+                <!-- 此处id字段限制为readonly -->
                 <div class="mdui-col-xs-9">
-                    <input readonly type="text" class="form-control" id="User_ID" placeholder="User ID" name="User_ID" value="<?php echo $myrow['User_ID']; ?>">
+                    <?php inputbox(array(
+                        "name"=>"User_ID",
+                        "defaultvalue"=>$myrow['User_ID'],
+                        "extra"=>"readonly"
+                    ));
+                    ?>
                 </div>
                 <!-- value字段填对应的查询到的原先的值 -->
                 
                 <div class="mdui-col-xs-3">User_Name:</div>
                 <div class="mdui-col-xs-9">
-                    <!-- required必填字段 -->
-                    <input required type="text" class="form-control" id="User_Name" placeholder="Input User name" name="User_Name" value="<?php echo $myrow['User_Name']; ?>">
+                    <?php inputbox(array(
+                            "name"=>"User_Name",
+                            "defaultvalue"=>$myrow['User_Name'],
+                            "required"=>true
+                        ));
+                    ?>
                 </div>
                 
                 <div class="mdui-col-xs-3">Telephone:</div>
                 <div class="mdui-col-xs-9">
-                    <input required pattern="^\d{11}$" type="text" onInput="checkit(this,'you need to fill 11 numbers')" class="form-control" id="Telephone" placeholder="Input Telephone" name="Telephone" value="<?php echo $myrow['Telephone']; ?>">
+                    <?php inputbox(array(
+                            "name"=>"Telephone",
+                            "defaultvalue"=>$myrow['Telephone'],
+                            "required"=>true,
+                            "pattern"=>"^\d{11}$",
+                            "patternword"=>"must be 11 numbers"
+                        ));
+                    ?>
                 </div>
 
                 <div class="mdui-col-xs-3">Payment_Method:</div>
                 <div class="mdui-col-xs-9">
                 <!-- 单选框 -->
-                <select class="mdui-select" name="Payment_Method">
-                    <option value="Wechat" <?php 
-                    $isselect=$myrow['Payment_Method']="Wechat"?"selected":"";
-                    echo $isselect;
-                    ?>>Wechat</option>
-                    <option value="Alipay" <?php 
-                    $isselect=$myrow['Payment_Method']="Alipay"?"selected":"";
-                    echo $isselect;
-                    ?>>Alipay</option>
-                    <option value="VISA" <?php 
-                    $isselect=$myrow['Payment_Method']="VISA"?"selected":"";
-                    echo $isselect;
-                    ?>>VISA</option>
-                    <option value="MASTERCARD" <?php 
-                    $isselect=$myrow['Payment_Method']="MASTERCARD"?"selected":"";
-                    echo $isselect;
-                    ?>>MASTERCARD</option>
-                </select>    
+                    <?php
+                        selectbox(array(
+                            "name"=>"Payment_Method",
+                            "valuelist"=>array("Wechat","Alipay","VISA","MASTERCARD"),
+                            "defaultvalue"=>$myrow['Payment_Method']
+                        )) 
+                    ?>
                 </div>
 
                 <div class="mdui-col-xs-3">Shipping_Address:</div>
                 <div class="mdui-col-xs-9">
-                    <input required type="text" class="form-control" id="Shipping_Address" placeholder="Input Shipping_Address" name="Shipping_Address" value="<?php echo $myrow['Shipping_Address']; ?>">
+                    <?php 
+                        inputbox(array(
+                            "name"=>"Shipping_Address",
+                            "defaultvalue"=>$myrow['Shipping_Address'],
+                            "required"=>true
+                        ));
+                    ?>
                 </div>
-                <!-- 按钮内容和name随着$mode的值变化,从而实现不同的添加修改删除效果 -->
+                <!-- 这个按钮name值根据$mode可以为create或update -->
                 <button  style="text-transform:capitalize;" type="submit" class="btn btn-primary" id="<?php echo $mode ?>" name="<?php echo $mode ?>" value="<?php echo $mode ?>"> <?php echo $mode ?> </button>
+                <!-- 如果是$mode是update，出现删除按钮，这个按钮name恒为delete -->
+                <?php if($mode=="update"){
+                    echo '<button 
+                    style="text-transform:capitalize;" type="submit" class="btn btn-primary mdui-color-red-500" id="delete" name="delete" value="delete"> delete </button>';
+                }
+                ?>
             </form>
         </div>
     </div>
@@ -165,6 +176,9 @@
 <!-- 这个页面的JS，放在文档尾部 -->
 <script src="a5common/commonJS.js?<?php echo rand(1,999999) ?>"></script>
 <script>
- 
+    // 演示，name为User_Name的inputbox只能填写在user表的User_Name列中已有的内容。
+    window.addEventListener("load",function(){
+        itMustNotExist('User_Name','user','User_Name','<?php echo $myrow['User_Name'] ?>')
+    })
 </script>
 </html>

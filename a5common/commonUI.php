@@ -1,5 +1,5 @@
-<!-- 一些可以重复使用的UI -->
 <?php
+    // 一些可以重复使用的UI
     // 顶部栏
     function topbarUI(){
         echo '
@@ -63,5 +63,39 @@
             </ul>
         </div>
         ';//记得分号
+    }
+
+
+    // 输入框
+    // 传入时name必填
+    function inputbox($config){
+        $name=$config["name"];
+        $defaultvalue=isset($config["defaultvalue"])?$config["defaultvalue"]:"";
+        $required=isset($config["required"])?$config["required"]:false;
+        $placeholder=isset($config["placeholder"])?$config["placeholder"]:"Input $name";
+        $pattern=isset($config["pattern"])?$config["pattern"]:"^.*$";
+        $patternword=isset($config["patternword"])?$config["patternword"]:"Invalid Input";
+        $extra=isset($config["extra"])?$config["extra"]:"";
+
+        $requirestr=$required?"required":"";
+
+        echo "
+        <input $requirestr $extra pattern='$pattern' type='text' onInput='checkit(this,`$patternword`)' class='form-control' id='$name' placeholder='$placeholder' name='$name' value='$defaultvalue'>
+        ";
+    }
+
+    // 选择框
+    // 传入时name和valuelist必填
+    function selectbox($config){
+        $name=$config["name"];
+        $valuelist=$config["valuelist"];
+        $defaultvalue=isset($config["defaultvalue"])?$config["defaultvalue"]:"";
+
+        echo "<select class='mdui-select' name='Payment_Method'>'";
+        foreach($valuelist as $value){
+            $isselect=$defaultvalue==$value?'selected':'';
+            echo "<option value='$value' $isselect>$value</option>";
+        }
+        echo "</select>";
     }
 ?>
