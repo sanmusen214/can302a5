@@ -115,7 +115,6 @@
                     ));
                     ?>
                 </div>
-                <!-- value字段填对应的查询到的原先的值 -->
                 
                 <div class="mdui-col-xs-3">User_Name:</div>
                 <div class="mdui-col-xs-9">
@@ -162,11 +161,19 @@
                     ?>
                 </div>
                 <!-- 这个按钮name值根据$mode可以为create或update -->
-                <button  style="text-transform:capitalize;" type="submit" class="btn btn-primary" id="<?php echo $mode ?>" name="<?php echo $mode ?>" value="<?php echo $mode ?>"> <?php echo $mode ?> </button>
+                <?php 
+                    buttonbox(array(
+                        "name"=>$mode,
+                        "cssclass"=>"mdui-color-green-700"
+                    ));
+                ?>
                 <!-- 如果是$mode是update，出现删除按钮，这个按钮name恒为delete -->
-                <?php if($mode=="update"){
-                    echo '<button 
-                    style="text-transform:capitalize;" type="submit" class="btn btn-primary mdui-color-red-500" id="delete" name="delete" value="delete"> delete </button>';
+                <?php 
+                    if($mode=="update"){
+                        buttonbox(array(
+                            "name"=>"delete",
+                            "cssclass"=>"mdui-color-red-500"
+                        ));
                 }
                 ?>
             </form>
@@ -176,7 +183,11 @@
 <!-- 这个页面的JS，放在文档尾部 -->
 <script src="a5common/commonJS.js?<?php echo rand(1,999999) ?>"></script>
 <script>
-    // 演示，name为User_Name的inputbox只能填写在user表的User_Name列中已有的内容。
+    // 让User_Name的input框只能填写不重复的用户名
+    // 第一个参数为inputbox的name
+    // 第二个参数为user数据库名
+    // 第三个参数为该数据库的User_Name列
+    // 第四个参数可选，排除原先值
     window.addEventListener("load",function(){
         itMustNotExist('User_Name','user','User_Name','<?php echo $myrow['User_Name'] ?>')
     })

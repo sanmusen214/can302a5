@@ -24,7 +24,7 @@
                 <button onclick='location.href=`a5categoryedit.php?c_id=$rowid`' class='mdui-btn mdui-btn-icon mdui-color-teal-500'>
                     <i class='mdui-icon material-icons'>brush</i>
                 </button>
-                <button onclick='location.href=`a5categoryedit.php?c_deleteid=$rowid`' class='mdui-btn mdui-btn-icon mdui-color-red-500'>
+                <button onclick='location.href=`a5categoryedit.php?c_id=$rowid`' class='mdui-btn mdui-btn-icon mdui-color-red-500'>
                     <i class='mdui-icon material-icons'>delete</i>
                 </button>
                 </td>";

@@ -22,15 +22,6 @@
         }else if(myget("create")){
             // 设为新建模式，对应按钮值create
             $mode="create";
-        }else if(myget("c_deleteid")){
-            // 设为删除模式，对应按钮值delete
-            $mode="delete";
-            $urlid=myget("c_deleteid");
-            // 查询原先数据
-            $sql = "SELECT * FROM category WHERE `Category_ID`='$urlid'";
-            $query = $con->query($sql);
-            // 得到结果
-            $myrow=$query->fetch();
         }
     
         // 当用户点按钮提交表单时,接受表单内用户填写的参数
@@ -54,8 +45,7 @@
         }else if(isset($_POST['create'])){
             //如果点击按钮值是create,插入新数据
             $sql = "
-            INSERT INTO `category` (`Category_ID`, `Category_Name`, `Category_Status`,`Description`) VALUES 
-            (NULL, '$categoryName','$categoryStatus','$categoryDescription')
+            INSERT INTO `category` (`Category_ID`, `Category_Name`, `Category_Status`,`Description`) VALUES (NULL, '$categoryName','$categoryStatus','$categoryDescription')
             ";
             $con->exec($sql);
             // 网页跳转到
@@ -110,37 +100,64 @@
                 <div class="mdui-col-xs-3">Category ID:</div>
                 <!-- 此处id限制为readonly -->
                 <div class="mdui-col-xs-9">
-                    <input readonly type="text" class="form-control" id="Category_ID" placeholder="Category ID" name="Category_ID" value="<?php echo $myrow['Category_ID']; ?>">
+                    <?php
+                        inputbox(array(
+                            "name"=>"Category_ID",
+                            "defaultvalue"=>$myrow['Category_ID'],
+                            "extra"=>"readonly"
+                        ));
+                    ?>
                 </div>
-                <!-- value字段填对应的查询到的原先的值 -->
                 
                 <div class="mdui-col-xs-3">Category Name:</div>
                 <div class="mdui-col-xs-9">
                     <!-- required必填字段 -->
-                    <input required type="text" class="form-control" id="Category_Name" placeholder="Input Category Name" name="Category_Name" value="<?php echo $myrow['Category_Name']; ?>">
+                    <?php
+                        inputbox(array(
+                            "name"=>"Category_Name",
+                            "defaultvalue"=>$myrow['Category_Name'],
+                            "required"=>true
+                        ));
+                    ?>
                 </div>
 
                 <div class="mdui-col-xs-3">Status Select:</div>
                 <div class="mdui-col-xs-9">
                 <!-- 单选框 -->
-                <select class="mdui-select" name="Category_Status">
-                    <option value="Available" <?php 
-                    $isselect=$myrow['Category_Status']="Available"?"selected":"";
-                    echo $isselect;
-                    ?>>Avaliable</option>
-                    <option value="Available" <?php 
-                    $isselect=$myrow['Category_Status']="Not Available"?"selected":"";
-                    echo $isselect;
-                    ?>>Not Available</option>
-                </select>    
+                    <?php
+                        selectbox(array(
+                            "name"=>"Category_Status",
+                            "valuelist"=>array("Avaliable","Not Available"),
+                            "defaultvalue"=>$myrow['Category_Status']
+                        ));
+                    ?>
                 </div>
 
                 <div class="mdui-col-xs-3">Description:</div>
                 <div class="mdui-col-xs-9">
-                    <input required type="text" class="form-control" id="Description" placeholder="Input Description" name="Description" value="<?php echo $myrow['Description']; ?>">
+                    <?php
+                        inputbox(array(
+                            "name"=>"Description",
+                            "defaultvalue"=>$myrow['Description'],
+                            "required"=>true
+                        ));
+                    ?>
                 </div>
                 <!-- 按钮内容和name随着$mode的值变化,从而实现不同的添加修改删除效果 -->
-                <button  style="text-transform:capitalize;" type="submit" class="btn btn-primary" id="<?php echo $mode ?>" name="<?php echo $mode ?>" value="<?php echo $mode ?>"> <?php echo $mode ?> </button>
+                <?php 
+                    buttonbox(array(
+                        "name"=>$mode,
+                        "cssclass"=>"mdui-color-green-700"
+                    ));
+                ?>
+                <?php 
+                    if($mode=="update"){
+                        buttonbox(array(
+                            "name"=>"delete",
+                            "cssclass"=>"mdui-color-red-500"
+                        ));
+                    }
+                ?>
             </form>
         </div>
     </div>
