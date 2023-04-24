@@ -7,7 +7,7 @@
             <a onclick="toggleSiderbar()" class="mdui-btn mdui-btn-icon">
                 <i class="mdui-icon material-icons">menu</i>
             </a>
-            <span class="mdui-typo-title" style="color:black;">A5 Shopping Mall Admin System</span>
+            <span class="mdui-typo-title" style="color:black;">A5 Shopping Mall Admin System（出现数据库错误时先试试用database.sql建新的数据库嗷）</span>
             <div class="mdui-toolbar-spacer"></div>
             <a onclick="clickSomething()" class="mdui-btn mdui-btn-icon">
                 <i class="mdui-icon material-icons">assignment_late</i>
