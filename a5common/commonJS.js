@@ -72,13 +72,15 @@ function cannotclick(e){
  * @param elementid 那个input的id，不带#号
  * @param tablename 数据表名
  * @param indexname 数据列名
+ * @param mentionword 自定义提示词
+ * 
  */
-function itMustExist(elementid,tablename,indexname){
+function itMustExist(elementid,tablename,indexname,mentionword="Do not exist"){
     getValidIndex(tablename,indexname,(res)=>{
         let namelist=res.data;
         document.querySelector(`#${elementid}`).addEventListener("input",(e)=>{
             if(!namelist.includes(e.target.value)){
-                document.querySelector(`#${elementid}`).setCustomValidity("Do not exist")
+                document.querySelector(`#${elementid}`).setCustomValidity(mentionword)
             }else{
                 document.querySelector(`#${elementid}`).setCustomValidity("")
             }
@@ -93,8 +95,9 @@ function itMustExist(elementid,tablename,indexname){
  * @param tablename 数据表名
  * @param indexname 数据列名
  * @param exceptval 如果input的值为该值，则不进行该判断
+ * @param mentionword 自定义提示词
  */
- function itMustNotExist(elementid,tablename,indexname,exceptval="|"){
+ function itMustNotExist(elementid,tablename,indexname,exceptval="|",mentionword="It is duplicated"){
     getValidIndex(tablename,indexname,(res)=>{
         let namelist=res.data;
         document.querySelector(`#${elementid}`).addEventListener("input",(e)=>{
@@ -104,7 +107,7 @@ function itMustExist(elementid,tablename,indexname){
                 document.querySelector(`#${elementid}`).setCustomValidity("")
             }else{
                 if(namelist.includes(e.target.value)){
-                    document.querySelector(`#${elementid}`).setCustomValidity("It is duplicated")
+                    document.querySelector(`#${elementid}`).setCustomValidity(mentionword)
                 }else{
                     document.querySelector(`#${elementid}`).setCustomValidity("")
                 }
