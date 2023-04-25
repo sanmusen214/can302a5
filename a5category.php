@@ -1,7 +1,39 @@
 <?php
     require_once "a5common/commonPHP.php";
     require_once "a5common/commonUI.php";
+
+
+        // 定义查询语句，只找deleted字段为TRUE的那些数据
+        $categorysql='SELECT * FROM category WHERE `deleted`= FALSE';
+        // 定义表头数据，这个名字最好不要重复，比如user页面的表头的变量名为userhead，那么order页面的这个变量名就可以是orderhead
+        $categoryhead=' 
+                    <th>Category ID</th>
+                    <th>Category Name</th>
+                    <th>Category Status</th>
+                    <th>Description</th>
+                    ';
+        // 定义查询到的每行数据怎么渲染，这里的row指一行数据
+        function categoryrender($row){
+            $rowid=$row["Category_ID"];
+    
+            echo "<td>".$row["Category_ID"]."</td>";
+            echo "<td>".$row["Category_Name"]."</td>";
+            echo "<td>".$row["Category_Status"]."</td>";
+            echo "<td>".$row["Description"]."</td>";
+            echo "<td>
+                <button onclick='location.href=`a5categoryedit.php?c_id=$rowid`' class='mdui-btn mdui-btn-icon mdui-color-teal-500'>
+                    <i class='mdui-icon material-icons'>brush</i>
+                </button>
+                <button onclick='location.href=`a5categoryedit.php?c_id=$rowid`' class='mdui-btn mdui-btn-icon mdui-color-red-500'>
+                    <i class='mdui-icon material-icons'>delete</i>
+                </button>
+                </td>";
+        }
+        // 定义表格右上角加号跳转目的地
+        $cataddtarget="a5categoryedit.php?create=1";
+    
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -34,14 +66,14 @@
     ?>
     <!-- 主内容 -->
     <div class="content">
-        <?php
-            echo "Category";
-        ?>
-        <button onClick="location.href='a5categoryedit.php?id=8'">跳到编辑页</button>
+    <?php
+        // 将开头定义的几个东西按顺序传进去，注意第四个参数是函数的名字
+        displayList($con,$categorysql,$categoryhead,"categoryrender",$cataddtarget);
+    ?>
     </div>
 </body>
 <!-- 这个页面的JS，放在文档尾部 -->
-<script src="a5common/commonJS.js"></script>
+<script src="a5common/commonJS.js?<?php echo rand(1,999999) ?>"></script>
 <script>
     
 </script>
