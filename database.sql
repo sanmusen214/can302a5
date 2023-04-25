@@ -32,11 +32,17 @@ USE a5asm2;
 
 CREATE TABLE `admin` (
   `Admin_ID` int(16) NOT NULL,
+  `Admin_Account` varchar(16) NOT NULL,
   `Admin_Password` varchar(32) NOT NULL,
   `Status` tinyint(1) NOT NULL,
   `Permission` varchar(16) NOT NULL,
   `deleted` tinyint(1) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- 转存表中的数据 `admin`
+--
+INSERT INTO `admin` (`Admin_ID`, `Admin_Account`, `Admin_Password`, `Status`, `Permission`, `deleted`) VALUES (1, 'admin', 'admin', 1, 'admin', 0);
 
 -- --------------------------------------------------------
 

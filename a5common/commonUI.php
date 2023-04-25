@@ -1,14 +1,18 @@
 <?php
     // 一些可以重复使用的UI
     // 顶部栏
-    function topbarUI(){
+    /**
+     * @param hideoption 隐藏右侧操作栏
+     */
+    function topbarUI($hideoption=false){
         echo '
         <div class="mdui-toolbar mdui-color-theme" style="color:green;">
             <a onclick="toggleSiderbar()" class="mdui-btn mdui-btn-icon">
                 <i class="mdui-icon material-icons">menu</i>
             </a>
-            <span class="mdui-typo-title" style="color:black;">A5 Shopping Mall Admin System（出现数据库错误时先试试用database.sql建新的数据库嗷）</span>
-            <div class="mdui-toolbar-spacer"></div>
+            <span class="mdui-typo-title" style="color:black;">A5 Shopping Mall Admin System（出现数据库错误时先试试用database.sql建新的数据库嗷）</span>';
+        if(!$hideoption){
+            echo '<div class="mdui-toolbar-spacer"></div>
             <a onclick="clickSomething()" class="mdui-btn mdui-btn-icon">
                 <i class="mdui-icon material-icons">assignment_late</i>
             </a>
@@ -23,9 +27,9 @@
             </div>
             <a onclick="clickSomething()" class="mdui-btn mdui-btn-icon">
                 <i class="mdui-icon material-icons">exit_to_app</i>
-            </a>
-        </div>
-        ';//记得分号
+            </a>';
+        }
+        echo '</div>';//记得分号
     }
     // 侧边框
     function siderbarUI(){
