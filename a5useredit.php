@@ -160,6 +160,15 @@
                         ));
                     ?>
                 </div>
+                <?php
+                    // selectitemsbox(array(
+                    //     "name"=>"User_Past_Name",//这个选择框字段的name
+                    //     "tablename"=>"user",//数据来源 数据表名
+                    //     "indexname"=>"User_Name",//数据来源 数据表某一列
+                    //     "defaultvalue"=>$myrow['User_Name'],//选择框默认值
+                    //     "all"=>false//true时显示所有存在的数据，false时隐藏被删除的那些
+                    // ));
+                ?>
                 <!-- 这个按钮name值根据$mode可以为create或update -->
                 <?php 
                     buttonbox(array(

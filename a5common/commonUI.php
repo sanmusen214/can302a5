@@ -103,6 +103,34 @@
         echo "</select>";
     }
 
+    // 选择框，只能选取数据库里已经有的内容
+    // 传入时name，tablename和indexname必填
+    function selectitemsbox($config){
+        global $con;
+        $tablename=$config["tablename"];
+        $indexname=$config["indexname"];
+        $defaultvalue=isset($config["defaultvalue"])?$config["defaultvalue"]:"";
+        $all=isset($config["all"])?$config["all"]:true;
+        
+        if($all){
+            $sql = "SELECT $indexname FROM $tablename";
+        }else{
+            $sql = "SELECT $indexname FROM $tablename WHERE `deleted`=false";
+        }
+
+        $query = $con->query($sql);
+        $data=array();
+        foreach($query as $row){
+            // 拼接查询结果
+            $data[]=$row[$indexname];
+        }
+        selectbox(array(
+            "name"=>$config["name"],
+            "valuelist"=>$data,
+            "defaultvalue"=>$defaultvalue
+        ));
+    }
+
 
     // 按钮 name必填
     function buttonbox($config){
