@@ -92,13 +92,20 @@
     // 传入时name和valuelist必填
     function selectbox($config){
         $name=$config["name"];
-        $valuelist=$config["valuelist"];
+        $displaylist=isset($config["displaylist"])?$config["displaylist"]:array();//可选，显示的名字
+        $valuelist=$config["valuelist"];//必须，选取后实际的值
         $defaultvalue=isset($config["defaultvalue"])?$config["defaultvalue"]:"";
 
         echo "<select class='mdui-select' name='$name'>'";
-        foreach($valuelist as $value){
-            $isselect=$defaultvalue==$value?'selected':'';
-            echo "<option value='$value' $isselect>$value</option>";
+        for($i=0;$i<count($valuelist);$i++){
+            $value=$valuelist[$i];
+            if(isset($config["displaylist"])){
+                $displayname=$displaylist[$i];
+            }else{
+                $displayname=$valuelist[$i];
+            }
+            $isselect=$defaultvalue===$value?'selected':'';
+            echo "<option value='$value' $isselect>$displayname</option>";
         }
         echo "</select>";
     }
@@ -108,27 +115,42 @@
     function selectitemsbox($config){
         global $con;
         $tablename=$config["tablename"];
-        $indexname=$config["indexname"];
+        $indexname=$config["indexname"];//实际的值的列下标
         $defaultvalue=isset($config["defaultvalue"])?$config["defaultvalue"]:"";
+        $displayindexname=isset($config["displayindexname"])?$config["displayindexname"]:"";//显示的值的列下标
         $all=isset($config["all"])?$config["all"]:true;
         
         if($all){
-            $sql = "SELECT $indexname FROM $tablename";
+            $sql = "SELECT * FROM $tablename";
         }else{
-            $sql = "SELECT $indexname FROM $tablename WHERE `deleted`=false";
+            $sql = "SELECT * FROM $tablename WHERE `deleted`=false";
         }
 
         $query = $con->query($sql);
-        $data=array();
+        $data=array();//实际的
+        $displaylist=array();//显示的
         foreach($query as $row){
             // 拼接查询结果
             $data[]=$row[$indexname];
+            if(isset($config["displayindexname"])){
+                $displaylist[]=$row[$displayindexname];
+            }
         }
-        selectbox(array(
-            "name"=>$config["name"],
-            "valuelist"=>$data,
-            "defaultvalue"=>$defaultvalue
-        ));
+        if(isset($config["displayindexname"])){
+            selectbox(array(
+                "name"=>$config["name"],
+                "displaylist"=>$displaylist,
+                "valuelist"=>$data,//实际的
+                "defaultvalue"=>$defaultvalue
+            ));
+        }else{
+            selectbox(array(
+                "name"=>$config["name"],
+                "valuelist"=>$data,
+                "defaultvalue"=>$defaultvalue
+            ));
+        }
+        
     }
 
 

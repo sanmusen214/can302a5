@@ -64,7 +64,9 @@ CREATE TABLE `category` (
 
 INSERT INTO `category` (`Category_ID`, `Category_Name`, `Category_Status`, `Description`, `deleted`) VALUES
 (1, 'Fruit', 'Available', 'Keep Healthy', 0),
-(2, 'Food', 'Available', 'Eat Something', 0);
+(2, 'Food', 'Available', 'Eat Something', 0),
+(3, 'Technical Items', 'Available', 'Amazing Technology
+', 0);
 
 -- --------------------------------------------------------
 
@@ -115,6 +117,12 @@ CREATE TABLE `product` (
   `Product_Image_link` varchar(100) NOT NULL,
   `deleted` tinyint(1) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- 转存表中的数据 `product`
+--
+
+INSERT INTO `product` (`Product_ID`, `Product_Name`, `Product_Category_ID`, `Product_In_stock`, `Product_Price`, `Product_Description`, `Product_Image_link`, `deleted`) VALUES (1, 'Apple IPhone 14', '3', '200', '100', 'Smartphone created by Apple', 'https://img0.baidu.com/it/u=4218582401,428653023&fm=253&fmt=auto&app=138&f=JPEG?w=1026&h=500', '0');;
 
 -- --------------------------------------------------------
 

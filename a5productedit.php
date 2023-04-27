@@ -145,9 +145,10 @@
                     <?php
                         selectitemsbox(array(
                         "name"=>"Product_Category_ID",
-                        "tablename"=>"category",
-                        "indexname"=>"Category_Name", //会不会有问题
-                        "defaultvalue"=>$myrow['Product_Category_ID'],
+                        "tablename"=>"category", // 数据库表名
+                        "indexname"=>"Category_ID", //选取后的实际值，表的下标
+                        "displayindexname"=>"Category_Name",//选取框显示的名字，表的下标
+                        "defaultvalue"=>$myrow['Product_Category_ID'],//实际值的默认值
                         "all"=>false//true时显示所有存在的数据，false时隐藏被删除的那些
                         ));
                     ?>
