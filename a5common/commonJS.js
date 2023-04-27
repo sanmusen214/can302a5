@@ -26,6 +26,7 @@ function findWhichAreSelected(){
             reslist.push(rowelements)
         }
     }
+    console.log(reslist)
     return reslist
 }
 

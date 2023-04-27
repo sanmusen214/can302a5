@@ -1,11 +1,20 @@
 # HOW TO RUN
 
+##
+
 1. 在电脑的xampp安装目录下的/htdocs文件夹内，执行git clone，此时文件夹结构为 /htdocs/can302a5
 2. 启动xampp的apache和mysql
 3. 在mysql的[admin页面](http://localhost/phpmyadmin/index.php?route=/server/sql)内，使用`database.sql`文件内的sql语句创建一个名为a5asm2的数据库以及其内的数据表。
 4. 访问[http://localhost/can302a5/](http://localhost/can302a5/)即可
 
-# REMINDER
+##
+
+1. Run `git clone https://github.com/sanmusen214/can302a5.git` in the folder `/htdocs` of XAMPP, which will make a folder structure like /htdocs/can302a5
+2. Run apache and mysql in XAMPP
+3. In [admin page,](http://localhost/phpmyadmin/index.php?route=/server/sql) use sql commands in `database.sql` to create database and tables.
+4. Visit [http://localhost/can302a5/](http://localhost/can302a5/)
+
+# Dev Readme
 
 ## 假删除
 
@@ -41,3 +50,7 @@
 ```
 
 deleted默认值为FALSE，添加一行新数据或修改数据时可以忽略deleted字段。
+
+## 面向组件构建
+
+基本实现了页面主要元素的组件化，如commonUI.php里封装的inputbox()，selectbox()。同时通过插件的方式为组件注入额外功能，如commonJS.js里的itMustExist()和itMustNotExist()
