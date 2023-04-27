@@ -115,5 +115,21 @@ function myColList($mycon){
     }
 }
 
+
+// 给定表名和主键名，以及一个主键以及要查询的字段名。
+// 查询某个表中某一行的某个字段
+/**
+ * @param tablename 表名
+ * @param primaryindex 主键名
+ * @param primaryname 某个主键
+ * @param searchindex 该主键所在行的另一字段
+ */
+function searchnameof($tablename,$primaryindex,$primaryname,$searchindex){
+    global $con;
+    $sql = "SELECT `$searchindex` FROM `$tablename` WHERE `$primaryindex`='$primaryname'";
+    $query = $con->query($sql);
+    return $query->fetch()[$searchindex];
+}
+
 ?>
 

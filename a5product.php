@@ -22,7 +22,7 @@
 
             echo "<td>".$row["Product_ID"]."</td>";
             echo "<td>".$row["Product_Name"]."</td>";
-            echo "<td>".$row["Product_Category_ID"]."</td>";//改成显示name
+            echo "<td>".searchnameof("category","Category_ID",$row["Product_Category_ID"],"Category_Name")."</td>";//改成显示name
             echo "<td>".$row["Product_In_stock"]."</td>";
             echo "<td>".$row["Product_Price"]."</td>";
             echo "<td>".$row["Product_Description"]."</td>";

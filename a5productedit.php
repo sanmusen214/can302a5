@@ -194,7 +194,7 @@
                 <!--Product_Image_link-->
                 <div class="mdui-col-xs-3">Product Image:</div>
                 <div class="mdui-col-xs-9">
-                    <img src=<?php echo $myrow["Product_Image_link"]?> alt="Product image" style='max-width: 200px'/>
+                    <img src=<?php echo $myrow["Product_Image_link"]?> alt="Product image" style='max-width: 300px;max-height: 200px'/>
                     <?php
                         inputbox(array(
                             "name"=>"Product_Image_link",
