@@ -1,6 +1,8 @@
 <?php
     require_once "a5common/commonPHP.php";
     require_once "a5common/commonUI.php";
+    checklogin();
+
 
 
     // 定义查询语句，只找deleted字段为TRUE的那些数据

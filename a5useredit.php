@@ -1,6 +1,8 @@
 <?php
     require_once "a5common/commonPHP.php";
     require_once "a5common/commonUI.php";
+    checklogin();
+
 
     // 表单里的默认值，这一步很重要
     $myrow=array(

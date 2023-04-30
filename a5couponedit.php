@@ -1,6 +1,8 @@
 <?php
     require_once "a5common/commonPHP.php";
     require_once "a5common/commonUI.php";
+    checklogin();
+
 ?>
 
 <!DOCTYPE html>

@@ -53,4 +53,4 @@ deleted默认值为FALSE，添加一行新数据或修改数据时可以忽略de
 
 ## 面向组件构建
 
-基本实现了页面主要元素的组件化，如commonUI.php里封装的inputbox()，selectbox()。同时通过插件的方式为组件注入额外功能，如commonJS.js里的itMustExist()和itMustNotExist()
+基本实现了页面主要元素的组件化，如commonUI.php里封装的inputbox()，selectbox()。同时通过插件的方式为组件注入额外功能，如commonJS.js里的itMustExist()和itMustNotExist()2

@@ -42,6 +42,8 @@ function setnewcookie($name,$value){
     setcookie($name, $value, $expire, "/");
 }
 
+session_start();
+
 /**
  * 从数据库中查询并展示一个列表，
  * 第一个参数为数据库实例
@@ -129,6 +131,15 @@ function searchnameof($tablename,$primaryindex,$primaryname,$searchindex){
     $sql = "SELECT `$searchindex` FROM `$tablename` WHERE `$primaryindex`='$primaryname'";
     $query = $con->query($sql);
     return $query->fetch()[$searchindex];
+}
+
+/**
+ * 如果登录，则不动，如果没登陆则跳到登录页
+ */
+function checklogin(){
+    if (!isset($_SESSION['user_id'])) {
+        header("Location: index.php");
+    }
 }
 
 ?>

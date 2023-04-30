@@ -2,15 +2,12 @@
     // header("Location:./a5product.php");
     require_once "a5common/commonPHP.php";
     require_once "a5common/commonUI.php";
-?>
 
 
-<?php
-
-//if (isset($_SESSION['user_id'])) {
-//    header("Location: a5product.php");
-//    exit;
-//}
+if (isset($_SESSION['user_id'])) {
+   header("Location: a5product.php");
+   exit;
+}
 
 
 $error = "";
@@ -105,12 +102,16 @@ if (isset($_POST['login'])) {
                 <div id="table"> 
                     <form class="form-online mdui-center" role="form" action="index.php" method="post">
                         <div class="mdui-textfield mdui-textfield-floating-label">
-                            <label class="mdui-textfield-label">Username</label>
-                            <input id="username" name="username" class="mdui-textfield-input"/>
+                            <label>Username</label>
+                            <input id="username" name="username" 
+                            placeholder="admin"
+                            class="mdui-textfield-input"/>
                         </div>
                         <div class="mdui-textfield mdui-textfield-floating-label">
-                            <label class="mdui-textfield-label">password</label>
-                            <input id="password" name="password" class="mdui-textfield-input"/>
+                            <label>password</label>
+                            <input id="password" 
+                            placeholder="admin"
+                            name="password" class="mdui-textfield-input"/>
                         </div>
                         <?php if (!empty($error)): ?>
                             <p style="color:red;"><?php echo $error; ?></p>
