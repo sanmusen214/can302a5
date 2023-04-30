@@ -163,7 +163,8 @@
                         inputbox(array(
                             "name"=>"Product_In_stock",
                             "defaultvalue"=>$myrow['Product_In_stock'],
-                            "required"=>true
+                            "required"=>true,
+                            "pattern"=>"\d*"
                         ));
                     ?>
                 </div>
@@ -175,7 +176,8 @@
                         inputbox(array(
                             "name"=>"Product_Price",
                             "defaultvalue"=>$myrow['Product_Price'],
-                            "required"=>true
+                            "required"=>true,
+                            "pattern"=>"^[0-9]+(\.[0-9]{1,2})?$"
                         ));
                     ?>
                 </div>
