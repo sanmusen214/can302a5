@@ -51,11 +51,40 @@ session_start();
  * 第三个参数为表头数据的html字符串
  * 第四个参数为一个回调函数，输入值是一行查询结果，然后自定义如何渲染这一行tr
  * 第五个参数是右上角加号的跳转目的地
+ * 第六个参数（可选）是用于搜索的数据库下标名字，使用这个参数的话则第二个参数应当最后有WHERE
  *  */ 
-function displayList($mycon,$mysqlstr,$myheadstr,$myrenderrow,$myaddurl){
+function displayList($mycon,$mysqlstr,$myheadstr,$myrenderrow,$myaddurl,$searchindexes=array()){
     // mycon为入参，使用这个函数的时候把全局的$con传入就行了
-    $query = $mycon->query($mysqlstr);
+    
+    // 如果有传入可搜索的下标searchindexed
+    if($searchindexes){
+        // 尝试获取searchword
+        if(isset($_GET["searchword"])){
+            $keyword=$_GET["searchword"];
+            // 将关键字里的'去掉，否则数据库报错
+            $keyword=str_replace("'","",$keyword);
+            // 拼接搜索 https://blog.csdn.net/qq_61726905/article/details/126891406
+            $mysqlstr=$mysqlstr." AND CONCAT(";
 
+            foreach($searchindexes as $ind){
+                $mysqlstr=$mysqlstr."IFNULL(`$ind`, ''),";
+            }
+            // 去除最后一位的逗号
+            $mysqlstr=substr($mysqlstr, 0, strlen($mysqlstr)-1);
+            $mysqlstr=$mysqlstr.") LIKE '%$keyword%';";
+            echo '<div class="mdui-textfield mdui-textfield-floating-label">
+            <i class="mdui-icon material-icons">search</i>
+            <label class="mdui-textfield-label">Search</label>
+            <input class="mdui-textfield-input" value="'.$keyword.'" id="listsearchbox"></input>
+        </div>';
+        }else{
+            echo '<div class="mdui-textfield mdui-textfield-floating-label">
+            <i class="mdui-icon material-icons">search</i>
+            <label class="mdui-textfield-label">Search</label>
+            <input class="mdui-textfield-input" value="" id="listsearchbox"></input>
+        </div>';
+        }
+    }
     echo '<div class="mdui-table-fluid">
             <table class="mdui-table mdui-table-selectable">
             <thead><tr>'.$myheadstr.'<th>
@@ -64,6 +93,7 @@ function displayList($mycon,$mysqlstr,$myheadstr,$myrenderrow,$myaddurl){
             <a style="color:green;" href="javascript:;" onclick="findWhichAreSelected()" class="mdui-btn mdui-btn-icon"><i class="mdui-icon material-icons">delete</i></a>
             <a style="color:green;" href="javascript:;" onclick="location.reload()" class="mdui-btn mdui-btn-icon"><i class="mdui-icon material-icons">autorenew</i></a>
             </th></tr></thead><tbody>';
+    $query = $mycon->query($mysqlstr);
     foreach($query as $row){
         $rowdata=array($row);
         echo "<tr>";

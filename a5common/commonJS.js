@@ -1,5 +1,12 @@
 // 可重复使用的js
 
+window.addEventListener("load",function(){
+    const searchbox=this.document.querySelector("#listsearchbox");
+    if(searchbox){
+        searchbox.addEventListener("keydown",entertosearch)
+    }
+})
+
 function clickSomething(){
     // 点击测试
     window.alert("你点击了这个东西");
@@ -29,6 +36,14 @@ function findWhichAreSelected(){
     console.log(reslist)
     return reslist
 }
+
+// 参数跳转搜索
+function entertosearch(e){
+    if(e.code==="Enter"){
+        location.href=location.href.split("?")[0]+"?searchword="+e.target.value
+    }
+}
+
 
 /**
  * @param obj this 对象

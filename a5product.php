@@ -40,6 +40,8 @@
         }
          // 定义表格右上角加号跳转目的地
          $prodaddtarget="a5productedit.php?create=1";
+        //  定义适用于搜索的下标们
+        $prodsearch=array("Product_Name","Product_Description");
 ?>
 
 <!DOCTYPE html>
@@ -75,7 +77,7 @@
     <div class="content">
         <?php
             // 将开头定义的几个东西按顺序传进去，注意第四个参数是函数的名字
-            displayList($con,$productsql,$producthead,"productrender",$prodaddtarget);
+            displayList($con,$productsql,$producthead,"productrender",$prodaddtarget,$prodsearch);
         ?>    
     </div>
 </body>
