@@ -3,6 +3,9 @@
     require_once "a5common/commonPHP.php";
     require_once "a5common/commonUI.php";
 
+if(isset($_GET["logout"])){
+    session_destroy();
+}
 
 if (isset($_SESSION['user_id'])) {
    header("Location: a5product.php");
@@ -110,6 +113,7 @@ if (isset($_POST['login'])) {
                         <div class="mdui-textfield mdui-textfield-floating-label">
                             <label>password</label>
                             <input id="password" 
+                            type="password"
                             placeholder="admin"
                             name="password" class="mdui-textfield-input"/>
                         </div>

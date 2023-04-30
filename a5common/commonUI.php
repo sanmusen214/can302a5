@@ -10,7 +10,7 @@
             <a onclick="toggleSiderbar()" class="mdui-btn mdui-btn-icon">
                 <i class="mdui-icon material-icons">menu</i>
             </a>
-            <span class="mdui-typo-title" style="color:black;">A5 Shopping Mall Admin System（出现数据库错误时先试试用database.sql建新的数据库嗷）</span>';
+            <span class="mdui-typo-title" style="color:black;">A5 Shopping Mall Admin System</span>';
         if(!$hideoption){
             echo '<div class="mdui-toolbar-spacer"></div>
             <a onclick="clickSomething()" class="mdui-btn mdui-btn-icon">
@@ -19,13 +19,13 @@
             <a onclick="clickSomething()" class="mdui-btn mdui-btn-icon">
                 <i class="mdui-icon material-icons">local_post_office</i>
             </a>
-            <div class="mdui-chip" style="line-height:normal" onclick="clickSomething()">
+            <div class="mdui-chip" style="line-height:normal" onclick="location.href=\'a5profile.php\'">
                 <span class="mdui-chip-icon">
                     <i class="mdui-icon material-icons">person</i>
                 </span>
                 <span class="mdui-chip-title">Admin</span>
             </div>
-            <a onclick="clickSomething()" class="mdui-btn mdui-btn-icon">
+            <a onclick="location.href=\'index.php?logout=1\'" class="mdui-btn mdui-btn-icon">
                 <i class="mdui-icon material-icons">exit_to_app</i>
             </a>';
         }

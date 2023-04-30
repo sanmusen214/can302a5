@@ -53,4 +53,24 @@ deleted默认值为FALSE，添加一行新数据或修改数据时可以忽略de
 
 ## 面向组件构建
 
-基本实现了页面主要元素的组件化，如commonUI.php里封装的inputbox()，selectbox()。同时通过插件的方式为组件注入额外功能，如commonJS.js里的itMustExist()和itMustNotExist()2
+基本实现了页面主要元素的组件化，如commonUI.php里封装的inputbox()，selectbox()。同时通过插件的方式为组件注入额外功能，如commonJS.js里的itMustExist()和itMustNotExist()
+
+### 组件inputbox
+
+输入性组件，使用pattern或结合插件可以实现对输入值的限制
+
+### 组件selectbox
+
+下拉选择组件，通过给定的valuelist表现下拉元素。
+
+### 组件selectitemsbox
+
+下拉选择组件，与selectbox不同的是下拉元素是通过查询mysql获得的。
+
+### 插件itMustExist()
+
+通过ajax请求查询和表单的错误弹窗事件，控制表单元素必须在某个表的表项中出现过，通过在文档末尾调用此函数，传入指定的表单input控件以及表名，表项即可
+
+### 插件itMustNotExist()
+
+同上，控制表单元素不在某个表的表项中出现过。

@@ -147,6 +147,24 @@ INSERT INTO `user` (`User_ID`, `User_Name`, `Telephone`, `Payment_Method`, `Ship
 (1, 'Zhang', '12345678910', 'MASTERCARD', 'China', 0),
 (2, 'Maven', '11111111111', 'MASTERCARD', 'Canada', 1);
 
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `profile`
+--
+
+CREATE TABLE `profile` (
+  `Shop_ID` int(16) NOT NULL,
+  `Shop_Name` varchar(32) NOT NULL,
+  `Shop_Logo` varchar(100) NOT NULL,
+  `Shop_Address` varchar(100) NOT NULL,
+  `Shop_Telephone` varchar(16) NOT NULL,
+  `Shop_Email` varchar(32) NOT NULL,
+  `deleted` tinyint(1) NOT NULL DEFAULT 0
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+INSERT INTO `profile` (`Shop_ID`, `Shop_Name`, `Shop_Logo`, `Shop_Address`, `Shop_Telephone`, `Shop_Email`, `deleted`) VALUES
+(1, 'CAN302 Shop', 'https://img1.baidu.com/it/u=1031608824,36587599&fm=253&fmt=auto&app=138&f=JPEG?w=707&h=500', 'XJTLU Suzhou, Jiangsu Province, China', '12345678910', '123456@outlook.com', 0);
 --
 -- 转储表的索引
 --
@@ -191,6 +209,8 @@ ALTER TABLE `product`
 ALTER TABLE `user`
   ADD PRIMARY KEY (`User_ID`);
 
+ALTER TABLE `profile`
+  ADD PRIMARY KEY (`Shop_ID`);
 --
 -- 在导出的表使用AUTO_INCREMENT
 --
@@ -205,7 +225,7 @@ ALTER TABLE `admin`
 -- 使用表AUTO_INCREMENT `category`
 --
 ALTER TABLE `category`
-  MODIFY `Category_ID` int(16) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `Category_ID` int(16) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- 使用表AUTO_INCREMENT `coupon`
@@ -223,7 +243,7 @@ ALTER TABLE `orders`
 -- 使用表AUTO_INCREMENT `product`
 --
 ALTER TABLE `product`
-  MODIFY `Product_ID` int(16) NOT NULL AUTO_INCREMENT;
+  MODIFY `Product_ID` int(16) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- 使用表AUTO_INCREMENT `user`
@@ -231,6 +251,8 @@ ALTER TABLE `product`
 ALTER TABLE `user`
   MODIFY `User_ID` int(16) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
+ALTER TABLE `profile`
+  MODIFY `Shop_ID` int(16) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- 限制导出的表
 --
