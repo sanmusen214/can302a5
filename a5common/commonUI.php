@@ -11,12 +11,13 @@
                 <i class="mdui-icon material-icons">menu</i>
             </a>
             <span class="mdui-typo-title" style="color:black;">A5 Shopping Mall Admin System</span>';
+        // 是否显示右侧操作栏
         if(!$hideoption){
             echo '<div class="mdui-toolbar-spacer"></div>
-            <a onclick="clickSomething()" class="mdui-btn mdui-btn-icon">
+            <a onclick="mdui.snackbar({\'message\':\'reminder\',\'position\':\'right-bottom\'})" class="mdui-btn mdui-btn-icon">
                 <i class="mdui-icon material-icons">assignment_late</i>
             </a>
-            <a onclick="clickSomething()" class="mdui-btn mdui-btn-icon">
+            <a onclick="mdui.snackbar({\'message\':\'message\',\'position\':\'right-bottom\'})" class="mdui-btn mdui-btn-icon">
                 <i class="mdui-icon material-icons">local_post_office</i>
             </a>
             <div class="mdui-chip" style="line-height:normal" onclick="location.href=\'a5profile.php\'">

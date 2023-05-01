@@ -7,7 +7,7 @@ window.addEventListener("load",function(){
     }
 })
 
-function clickSomething(){
+function clickSomething(message=""){
     // 点击测试
     window.alert("你点击了这个东西");
 }

@@ -36,6 +36,8 @@
     }
     // 定义表格右上角加号跳转目的地
     $useraddtarget="a5useredit.php?create=1";
+    // 定义可被搜索的字段
+    $usersearchind=array("User_ID","User_Name","Telephone","Payment_Method","Shipping_Address");
 
 ?>
 
@@ -72,7 +74,7 @@
     <div class="content">
         <?php
             // 将开头定义的几个东西按顺序传进去，注意第四个参数是函数的名字
-            displayList($con,$usersql,$userhead,"userrender",$useraddtarget);
+            displayList($con,$usersql,$userhead,"userrender",$useraddtarget,$usersearchind);
         ?>
     </div>
 </body>
