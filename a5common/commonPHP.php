@@ -85,7 +85,7 @@ function displayList($mycon,$mysqlstr,$myheadstr,$myrenderrow,$myaddurl,$searchi
             </button>
           </div>';
         }else{
-            echo '<div class="mdui-textfield mdui-textfield-expandable mdui-float-right" style="max-width:400px;margin-bottom:10px">
+            echo '<div class="mdui-textfield mdui-textfield-expandable mdui-float-right mdui-textfield-expanded" style="max-width:400px;margin-bottom:10px">
             <button class="mdui-textfield-icon mdui-btn mdui-btn-icon" onclick="clicktosearch()">
               <i class="mdui-icon material-icons">search</i>
             </button>
@@ -101,9 +101,9 @@ function displayList($mycon,$mysqlstr,$myheadstr,$myrenderrow,$myaddurl,$searchi
             <table class="mdui-table">
             <thead><tr>'.$myheadstr.'<th>
             <span style="display:inline-block;padding-right:30px;">Operations</span>
-            <a style="color:green;" href="javascript:;" onclick="location.href=`'.$myaddurl.'`" class="mdui-btn mdui-btn-icon"><i class="mdui-icon material-icons">add</i></a>
+            <a style="color:green;" href="javascript:;" onclick="location.href=`'.$myaddurl.'`;saveMessage(\'Add New\')" class="mdui-btn mdui-btn-icon"><i class="mdui-icon material-icons">add</i></a>
 
-            <a style="color:green;" href="javascript:;" onclick="location.reload()" class="mdui-btn mdui-btn-icon"><i class="mdui-icon material-icons">autorenew</i></a>
+            <a style="color:green;" href="javascript:;" onclick="location.reload();saveMessage(\'Refresh Page\')" class="mdui-btn mdui-btn-icon"><i class="mdui-icon material-icons">autorenew</i></a>
             </th></tr></thead><tbody>';
             // .mdui-table-selectable 批量删除            <a style="color:green;" href="javascript:;" onclick="findWhichAreSelected()" class="mdui-btn mdui-btn-icon"><i class="mdui-icon material-icons">delete</i></a>
     $query = $mycon->query($mysqlstr);

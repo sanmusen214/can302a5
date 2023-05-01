@@ -25,7 +25,7 @@ if (isset($_POST['login'])) {
     if ($result && $result['Admin_Password'] != null) {
             if ($password == $result['Admin_Password']) {
                 $_SESSION['user_id'] = $username;
-                header("Location: a5product.php");
+                header("Location: a5product.php?message=Welcome");
                 exit;
             } else {
                 $error = "Incorrect username or password.";

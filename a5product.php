@@ -41,7 +41,7 @@
          // 定义表格右上角加号跳转目的地
          $prodaddtarget="a5productedit.php?create=1";
         //  定义适用于搜索的下标们
-        $prodsearch=array("Product_Name","Product_Description");
+        $prodsearch=array("Product_ID","Product_Name","Product_Price","Product_Description");
 ?>
 
 <!DOCTYPE html>

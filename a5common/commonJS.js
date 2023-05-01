@@ -5,6 +5,7 @@ window.addEventListener("load",function(){
     if(searchbox){
         searchbox.addEventListener("keydown",entertosearch)
     }
+    displayMessage();
 })
 
 function clickSomething(message=""){
@@ -147,4 +148,38 @@ function itMustExist(elementid,tablename,indexname,mentionword="Do not exist"){
             }
         })
     })
+}
+
+// 存储消息，用于页面间消息提示
+function saveMessage(message){
+    localStorage.setItem("mymsg",message)
+}
+
+// 获取url参数
+function getQueryVariable(variable){
+    let query = window.location.search.substring(1);
+    let vars = query.split("&");
+    for (let i=0;i<vars.length;i++) {
+            let pair = vars[i].split("=");
+            if(pair[0] == variable){return pair[1];}
+    }
+    return("");
+}
+
+// 消费消息，用于页面间消息提示
+// 一旦调用，清除localStorage里的消息
+function displayMessage(){
+    mymsg=localStorage.getItem("mymsg")
+    if(!mymsg){
+        // 如果localStorage里没有
+        // 从网页url查找
+        mymsg=getQueryVariable("message")
+    }
+    if(mymsg){
+        mdui.snackbar({
+            message: mymsg,
+            position: 'right-bottom'
+          });
+    }
+    localStorage.removeItem("mymsg")
 }

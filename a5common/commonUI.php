@@ -14,19 +14,19 @@
         // 是否显示右侧操作栏
         if(!$hideoption){
             echo '<div class="mdui-toolbar-spacer"></div>
-            <a onclick="mdui.snackbar({\'message\':\'reminder\',\'position\':\'right-bottom\'})" class="mdui-btn mdui-btn-icon">
+            <a onclick="mdui.snackbar({\'message\':\'reminder\',\'position\':\'right-bottom\'})" class="mdui-btn mdui-btn-icon" mdui-tooltip="{content: `Reminder`}">
                 <i class="mdui-icon material-icons">assignment_late</i>
             </a>
-            <a onclick="mdui.snackbar({\'message\':\'message\',\'position\':\'right-bottom\'})" class="mdui-btn mdui-btn-icon">
+            <a onclick="mdui.snackbar({\'message\':\'message\',\'position\':\'right-bottom\'})" class="mdui-btn mdui-btn-icon" mdui-tooltip="{content: `Message`}">
                 <i class="mdui-icon material-icons">local_post_office</i>
             </a>
-            <div class="mdui-chip" style="line-height:normal" onclick="location.href=\'a5profile.php\'">
+            <div class="mdui-chip" style="line-height:normal" onclick="location.href=\'a5profile.php\'" mdui-tooltip="{content: `Profile`}">
                 <span class="mdui-chip-icon">
                     <i class="mdui-icon material-icons">person</i>
                 </span>
                 <span class="mdui-chip-title">Admin</span>
             </div>
-            <a onclick="location.href=\'index.php?logout=1\'" class="mdui-btn mdui-btn-icon">
+            <a onclick="location.href=\'index.php?logout=1\';saveMessage(\'Log out\')" mdui-tooltip="{content: `Exit`}" class="mdui-btn mdui-btn-icon">
                 <i class="mdui-icon material-icons">exit_to_app</i>
             </a>';
         }
@@ -160,6 +160,8 @@
         $name=$config["name"];
         $cssclass=isset($config["cssclass"])?$config["cssclass"]:"";
 
-        echo "<button  style='text-transform:capitalize;' type='submit' class='btn btn-primary $cssclass' id='$name' name='$name' value='$name'> $name </button>";
+        $attentionword=$name=="delete"?'mdui-tooltip="{content: `delete this`}"':"";
+
+        echo "<button $attentionword style='text-transform:capitalize;' type='submit' class='btn btn-primary $cssclass' id='$name' name='$name' value='$name'> $name </button>";
     }
 ?>
