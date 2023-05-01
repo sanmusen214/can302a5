@@ -37,13 +37,30 @@ function findWhichAreSelected(){
     return reslist
 }
 
-// 参数跳转搜索
+// 参数跳转,url添加搜索关键词
 function entertosearch(e){
     if(e.code==="Enter"){
-        location.href=location.href.split("?")[0]+"?searchword="+e.target.value
+        if(e.target.value===""){
+            location.href=location.href.split("?")[0]
+        }else{
+            location.href=location.href.split("?")[0]+"?searchword="+e.target.value
+        }
+
     }
 }
 
+// 点击搜索icon，url添加搜索关键词
+function clicktosearch(){
+    const searchbox=this.document.querySelector("#listsearchbox");
+    if(searchbox.value){
+        location.href=location.href.split("?")[0]+"?searchword="+searchbox.value
+    }
+}
+
+// 点击跳转现在url,清除url参数
+function clicktoclear(){
+    location.href=location.href.split("?")[0]
+}
 
 /**
  * @param obj this 对象

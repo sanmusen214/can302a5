@@ -57,6 +57,7 @@ function displayList($mycon,$mysqlstr,$myheadstr,$myrenderrow,$myaddurl,$searchi
     // mycon为入参，使用这个函数的时候把全局的$con传入就行了
     
     // 如果有传入可搜索的下标searchindexed
+    // 按钮
     if($searchindexes){
         // 尝试获取searchword
         if(isset($_GET["searchword"])){
@@ -72,19 +73,28 @@ function displayList($mycon,$mysqlstr,$myheadstr,$myrenderrow,$myaddurl,$searchi
             // 去除最后一位的逗号
             $mysqlstr=substr($mysqlstr, 0, strlen($mysqlstr)-1);
             $mysqlstr=$mysqlstr.") LIKE '%$keyword%';";
-            echo '<div class="mdui-textfield mdui-textfield-floating-label">
-            <i class="mdui-icon material-icons">search</i>
-            <label class="mdui-textfield-label">Search</label>
-            <input class="mdui-textfield-input" value="'.$keyword.'" id="listsearchbox"></input>
-        </div>';
+            echo '<div class="mdui-textfield mdui-textfield-expandable mdui-float-right mdui-textfield-expanded">
+            <button class="mdui-textfield-icon mdui-btn mdui-btn-icon" onclick="clicktosearch()">
+              <i class="mdui-icon material-icons">search</i>
+            </button>
+            <input class="mdui-textfield-input" type="text" placeholder="Search" id="listsearchbox" value='.$keyword.' />
+            <button class="mdui-textfield-close mdui-btn mdui-btn-icon">
+              <i class="mdui-icon material-icons" onclick="clicktoclear()">close</i>
+            </button>
+          </div>';
         }else{
-            echo '<div class="mdui-textfield mdui-textfield-floating-label">
-            <i class="mdui-icon material-icons">search</i>
-            <label class="mdui-textfield-label">Search</label>
-            <input class="mdui-textfield-input" value="" id="listsearchbox"></input>
-        </div>';
+            echo '<div class="mdui-textfield mdui-textfield-expandable mdui-float-right">
+            <button class="mdui-textfield-icon mdui-btn mdui-btn-icon" onclick="clicktosearch()">
+              <i class="mdui-icon material-icons">search</i>
+            </button>
+            <input class="mdui-textfield-input" type="text" placeholder="Search" id="listsearchbox"/>
+            <button class="mdui-textfield-close mdui-btn mdui-btn-icon">
+              <i class="mdui-icon material-icons" onclick="clicktoclear()">close</i>
+            </button>
+          </div>';
         }
     }
+    // 列表
     echo '<div class="mdui-table-fluid">
             <table class="mdui-table mdui-table-selectable">
             <thead><tr>'.$myheadstr.'<th>

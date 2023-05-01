@@ -31,6 +31,8 @@
         }
         // 定义表格右上角加号跳转目的地
         $cataddtarget="a5categoryedit.php?create=1";
+        // 可搜索的列
+        $catsearchind=array("Category_ID","Category_Name","Category_Status","Description");
     
 ?>
 
@@ -68,7 +70,7 @@
     <div class="content">
     <?php
         // 将开头定义的几个东西按顺序传进去，注意第四个参数是函数的名字
-        displayList($con,$categorysql,$categoryhead,"categoryrender",$cataddtarget);
+        displayList($con,$categorysql,$categoryhead,"categoryrender",$cataddtarget,$catsearchind);
     ?>
     </div>
 </body>
