@@ -3,6 +3,40 @@
     require_once "a5common/commonUI.php";
     checklogin();
 
+    // 定义查询语句，只找deleted字段为TRUE的那些数据
+$couponsql='SELECT * FROM coupon WHERE `deleted`= FALSE';
+// 定义表头数据，这个名字最好不要重复，比如user页面的表头的变量名为userhead，那么order页面的这个变量名就可以是orderhead
+$couponhead=' 
+                    <th>Coupon ID</th>
+                    <th>Coupon Name</th>
+                    <th>Discount Amount</th>
+                    <th>Create Time</th>
+                    <th>Expire Time</th>
+                    <th>Coupon Status</th>
+                    ';
+// 定义查询到的每行数据怎么渲染，这里的row指一行数据
+function couponyrender($row){
+    $rowid=$row["Coupon_ID"];
+
+    echo "<td>".$row["Coupon_ID"]."</td>";
+    echo "<td>".$row["Coupon_Name"]."</td>";
+    echo "<td>".$row["Discount_Amount"]."</td>";
+    echo "<td>".$row["Create_Time"]."</td>";
+    echo "<td>".$row["Expire_Time"]."</td>";
+    echo "<td>".$row["Coupon_Status"]."</td>";
+    echo "<td>
+                <button onclick='location.href=`a5couponedit.php?c_id=$rowid`' class='mdui-btn mdui-btn-icon mdui-color-teal-500'>
+                    <i class='mdui-icon material-icons'>brush</i>
+                </button>
+                <button onclick='location.href=`a5couponedit.php?c_id=$rowid`' class='mdui-btn mdui-btn-icon mdui-color-red-500'>
+                    <i class='mdui-icon material-icons'>delete</i>
+                </button>
+                </td>";
+}
+// 定义表格右上角加号跳转目的地
+$couponaddtarget="a5couponedit.php?create=1";
+
+$searchindex=array("Coupon_ID","Coupon_Name","Create_Time","Expire_Time","Coupon_Status");
 ?>
 
 <!DOCTYPE html>
@@ -36,10 +70,10 @@
     ?>
     <!-- 主内容 -->
     <div class="content">
-        <?php
-            echo "Coupon";
-        ?>
-        <button onClick="location.href='a5couponedit.php?id=6'">跳到编辑页</button>
+    <?php
+    // 将开头定义的几个东西按顺序传进去，注意第四个参数是函数的名字
+    displayList($con,$couponsql,$couponhead,"couponyrender",$couponaddtarget,$searchindex);
+    ?>
     </div>
 </body>
 <!-- 这个页面的JS，放在文档尾部 -->
