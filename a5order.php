@@ -7,9 +7,9 @@
     // 定义表头数据，这个名字最好不要重复，比如user页面的表头的变量名为userhead，那么order页面的这个变量名就可以是orderhead
     $orderhead=' 
                         <th>Order ID</th>
-                        <th>Order Product ID</th>
-                        <th>Order Customer ID</th>
-                        <th>Order Coupon ID</th>
+                        <th>Order Product</th>
+                        <th>Order Customer</th>
+                        <th>Order Coupon</th>
                         <th>Order Status</th>
                         <th>Order Time</th>
                         <th>Order Details</th>

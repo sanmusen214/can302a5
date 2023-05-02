@@ -18,7 +18,7 @@
         $producthead=' 
                     <th>Product ID</th>
                     <th>Product Name</th>
-                    <th>Category ID</th>
+                    <th>Category </th>
                     <th>In Stock</th>
                     <th>Price</th>
                     <th>Description</th>
