@@ -101,6 +101,11 @@ if(isset($_POST['update'])){
     <script src="js/jquery-331.min.js"></script>
     <script src="js/bootstrap-337.min.js"></script>
     <script src="https://unpkg.com/mdui@1.0.2/dist/js/mdui.min.js"></script>
+    <!-- 引入时间选择框 -->
+    <link rel="stylesheet" href="styles/bootstrap-datetimepicker.min.css">
+    <script src="js/moment-with-locales.js"></script>
+    <script src="js/bootstrap-datetimepicker.min.js"></script>
+
     <title>CAN302 A5 store | Order</title>
 </head>
 <body class="mdui-drawer-body-left mdui-theme-primary-white mdui-theme-accent-green">
@@ -190,10 +195,13 @@ if(isset($_POST['update'])){
             <div class="mdui-col-xs-9">
                 <!-- required必填字段 -->
                 <?php
-                inputbox(array(
+                timeselectbox(array(
                     "name"=>"Order_Time",
                     "defaultvalue"=>$myrow['Order_Time'],
-                    "required"=>true
+                    "required"=>true,
+                    "placeholder"=>"yyyy-mm-dd hh:mm:ss",
+                    "pattern"=>"^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}$",
+                    "patternword"=>"should be yyyy-mm-dd hh:mm:ss"
                 ));
                 ?>
             </div>
@@ -230,6 +238,10 @@ if(isset($_POST['update'])){
 <!-- 这个页面的JS，放在文档尾部 -->
 <script src="a5common/commonJS.js?<?php echo rand(1,999999) ?>"></script>
 <script>
-    
+    $(function () {
+        $('#Order_Time').datetimepicker({
+            format: 'YYYY-MM-DD hh:mm:ss',			//显示年月日
+        });
+    });
 </script>
 </html>

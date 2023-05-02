@@ -19,9 +19,9 @@
         $rowid=$row["Order_ID"];
 
         echo "<td>".$row["Order_ID"]."</td>";
-        echo "<td>".$row["Order_Product_ID"]."</td>";
-        echo "<td>".$row["Order_Customer_ID"]."</td>";
-        echo "<td>".$row["Order_Coupon_ID"]."</td>";
+        echo "<td><a href='./a5productedit.php?p_id=".$row["Order_Product_ID"]."'>".searchnameof("product","Product_ID",$row["Order_Product_ID"],"Product_Name")."</a></td>";
+        echo "<td><a href='a5useredit.php?id=".$row["Order_Customer_ID"]."'>".searchnameof("user","User_ID",$row["Order_Customer_ID"],"User_Name")."</a></td>";
+        echo "<td><a href='./a5couponedit.php?c_id=".$row["Order_Coupon_ID"]."'>".searchnameof("coupon","Coupon_ID",$row["Order_Coupon_ID"],"Coupon_Name")."</a></td>";
         echo "<td>".$row["Order_Status"]."</td>";
         echo "<td>".$row["Order_Time"]."</td>";
         echo "<td>".$row["Order_Details"]."</td>";

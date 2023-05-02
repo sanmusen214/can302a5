@@ -95,9 +95,15 @@ function getValidIndex(tablename,indexname,callback){
     }, 'json');
 }
 
-// 禁用点击
+// 禁用点击,表单提交没用
 function cannotclick(e){
     e.preventDefault();
+}
+
+// 阻止并提醒一次点击
+function checksubmit(e){
+    console.log(e)
+    return false;
 }
 
 /**

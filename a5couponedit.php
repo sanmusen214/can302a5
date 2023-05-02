@@ -34,10 +34,10 @@ $Coupon_Name = mypost('Coupon_Name');
 $Discount_Amount = mypost('Discount_Amount');
 $Create_Time = mypost('Create_Time');
 $Expire_Time = mypost('Expire_Time');
-$Coupon_Status = mypost('Coupon_Status');
+$t_Coupon_Status = mypost('Coupon_Status');
 
 $Coupon_Status = 1;
-if ($Coupon_Status == 'Not Available') {
+if ($t_Coupon_Status == 'Not Available') {
     $Coupon_Status = 2;
 }
 
@@ -98,6 +98,11 @@ if(isset($_POST['update'])){
     <script src="js/jquery-331.min.js"></script>
     <script src="js/bootstrap-337.min.js"></script>
     <script src="https://unpkg.com/mdui@1.0.2/dist/js/mdui.min.js"></script>
+    <!-- 引入时间选择框 -->
+    <link rel="stylesheet" href="styles/bootstrap-datetimepicker.min.css">
+    <script src="js/moment-with-locales.js"></script>
+    <script src="js/bootstrap-datetimepicker.min.js"></script>
+
     <title>CAN302 A5 store | Coupon</title>
 </head>
 <body class="mdui-drawer-body-left mdui-theme-primary-white mdui-theme-accent-green">
@@ -113,7 +118,7 @@ if(isset($_POST['update'])){
 <div class="content">
     <h1 style="text-transform:capitalize;"><?php echo $mode ?></h1>
     <div class="mdui-container">
-        <form class="" role="form" action="" method="post" >
+        <form class="" role="form" action="" method="post">
             <div class="mdui-col-xs-3">Coupon ID:</div>
             <!-- 此处id限制为readonly -->
             <div class="mdui-col-xs-9">
@@ -152,24 +157,29 @@ if(isset($_POST['update'])){
 
             <div class="mdui-col-xs-3">Create Time:</div>
             <div class="mdui-col-xs-9">
-                <!-- required必填字段 -->
-                <?php
-                inputbox(array(
+            <?php
+                timeselectbox(array(
                     "name"=>"Create_Time",
                     "defaultvalue"=>$myrow['Create_Time'],
-                    "required"=>true
+                    "required"=>true,
+                    "placeholder"=>"yyyy-mm-dd hh:mm:ss",
+                    "pattern"=>"^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}$",
+                    "patternword"=>"should be yyyy-mm-dd hh:mm:ss"
                 ));
                 ?>
+                
             </div>
 
             <div class="mdui-col-xs-3">Expire Time:</div>
             <div class="mdui-col-xs-9">
-                <!-- required必填字段 -->
                 <?php
-                inputbox(array(
+                timeselectbox(array(
                     "name"=>"Expire_Time",
                     "defaultvalue"=>$myrow['Expire_Time'],
-                    "required"=>true
+                    "required"=>true,
+                    "placeholder"=>"yyyy-mm-dd hh:mm:ss",
+                    "pattern"=>"^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}$",
+                    "patternword"=>"should be yyyy-mm-dd hh:mm:ss"
                 ));
                 ?>
             </div>
@@ -208,6 +218,13 @@ if(isset($_POST['update'])){
 <!-- 这个页面的JS，放在文档尾部 -->
 <script src="a5common/commonJS.js?<?php echo rand(1,999999) ?>"></script>
 <script>
-    
+    $(function () {
+        $('#Create_Time').datetimepicker({
+            format: 'YYYY-MM-DD hh:mm:ss',			//显示年月日
+        });
+        $('#Expire_Time').datetimepicker({
+            format: 'YYYY-MM-DD hh:mm:ss',			//显示年月日
+        });
+    });
 </script>
 </html>

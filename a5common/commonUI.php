@@ -162,6 +162,35 @@
 
         $attentionword=$name=="delete"?'mdui-tooltip="{content: `delete this`}"':"";
 
-        echo "<button $attentionword style='text-transform:capitalize;' type='submit' class='btn btn-primary $cssclass' id='$name' name='$name' value='$name'> $name </button>";
+        echo "<button $attentionword
+        style='text-transform:capitalize;' type='submit' class='btn btn-primary $cssclass' id='$name' name='$name' value='$name'> $name </button>";
+    }
+
+    // 时间选择
+    // 传入时name必填
+    function timeselectbox($config){
+        $name=$config["name"];
+        $defaultvalue=isset($config["defaultvalue"])?$config["defaultvalue"]:"";
+        $required=isset($config["required"])?$config["required"]:false;
+        $placeholder=isset($config["placeholder"])?$config["placeholder"]:"Input $name";
+        $pattern=isset($config["pattern"])?$config["pattern"]:"^.*$";
+        $patternword=isset($config["patternword"])?$config["patternword"]:"Invalid Input";
+        $extra=isset($config["extra"])?$config["extra"]:"";
+
+        $requirestr=$required?"required":"";
+
+        echo "<div class='input-group date' id='$name'>
+        <input $requirestr $extra 
+        type='text' 
+        pattern='$pattern'
+        class='form-control' 
+        onInput='checkit(this,`$patternword`)' 
+        placeholder='$placeholder' name='$name' 
+        value='$defaultvalue'
+        />
+        <span class='input-group-addon'>
+            <span class='glyphicon glyphicon-calendar'></span>
+        </span>
+    </div>";
     }
 ?>
