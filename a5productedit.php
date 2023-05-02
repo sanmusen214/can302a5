@@ -143,11 +143,11 @@
                 <!--Product_Category_ID| Category_ID-->
                 <div class="mdui-col-xs-3">Product CategoryID:</div>
                 <div class="mdui-col-xs-9">
-                <!-- 单选框 -->
+                <!-- 单选框：查找某个数据表的某一列，显示品类名，选取后实际是品类ID -->
                     <?php
                         selectitemsbox(array(
                         "name"=>"Product_Category_ID",
-                        "tablename"=>"category", // 数据库表名
+                        "tablename"=>"category", // 数据表名
                         "indexname"=>"Category_ID", //选取后的实际值，表的下标
                         "displayindexname"=>"Category_Name",//选取框显示的名字，表的下标
                         "defaultvalue"=>$myrow['Product_Category_ID'],//实际值的默认值

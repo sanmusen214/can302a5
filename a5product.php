@@ -6,6 +6,12 @@
 
         // 定义查询语句，只找deleted字段为TRUE的那些数据
         $productsql='SELECT * FROM product WHERE `deleted`= FALSE';
+        // 如果有搜索关键字
+        if(isset($_GET['cateid'])){
+            $cateid=myget('cateid');
+            $catestr=searchnameof("category","Category_ID",$cateid,"Category_Name");
+            $productsql="SELECT * FROM product WHERE `deleted`= FALSE AND `Product_Category_ID`=$cateid";
+        }
         // 定义表头数据，这个名字最好不要重复，比如user页面的表头的变量名为userhead，那么product页面的这个变量名就可以是producthead
         //Product_ID	Product_Name	Product_Category_ID	Product_In_stock	
         //Product_Price	Product_Description	Product_Image_link
@@ -24,7 +30,7 @@
 
             echo "<td>".$row["Product_ID"]."</td>";
             echo "<td>".$row["Product_Name"]."</td>";
-            echo "<td>".searchnameof("category","Category_ID",$row["Product_Category_ID"],"Category_Name")."</td>";//改成显示name
+            echo "<td><a href='./a5product.php?cateid=".$row["Product_Category_ID"]."'>".searchnameof("category","Category_ID",$row["Product_Category_ID"],"Category_Name")."</a></td>";//改成显示name
             echo "<td>".$row["Product_In_stock"]."</td>";
             echo "<td>".$row["Product_Price"]."</td>";
             echo "<td>".$row["Product_Description"]."</td>";
@@ -75,6 +81,12 @@
     ?>
     <!-- 主内容 -->
     <div class="content">
+        <?php 
+            if(isset($catestr)){
+                echo "<h2 style='float:left'>Category: $catestr&nbsp</h2>
+                <h2><a href='a5product.php'>-clear-</a></h2>";
+            }
+        ?>
         <?php
             // 将开头定义的几个东西按顺序传进去，注意第四个参数是函数的名字
             displayList($con,$productsql,$producthead,"productrender",$prodaddtarget,$prodsearch);
