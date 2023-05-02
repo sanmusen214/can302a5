@@ -72,7 +72,7 @@
     <div class="content">
         <?php
         // 将开头定义的几个东西按顺序传进去，注意第四个参数是函数的名字
-        displayList($con,$ordersql,$orderhead,"orderyrender",$orderaddtarget);
+        displayList($con,$ordersql,$orderhead,"orderyrender",$orderaddtarget,$searchind);
         ?>
     </div>
 </body>
