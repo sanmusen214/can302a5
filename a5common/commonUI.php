@@ -174,7 +174,6 @@
         $required=isset($config["required"])?$config["required"]:false;
         $placeholder=isset($config["placeholder"])?$config["placeholder"]:"Input $name";
         $pattern=isset($config["pattern"])?$config["pattern"]:"^.*$";
-        $patternword=isset($config["patternword"])?$config["patternword"]:"Invalid Input";
         $extra=isset($config["extra"])?$config["extra"]:"";
 
         $requirestr=$required?"required":"";
@@ -184,7 +183,6 @@
         type='text' 
         pattern='$pattern'
         class='form-control' 
-        onInput='checkit(this,`$patternword`)' 
         placeholder='$placeholder' name='$name' 
         value='$defaultvalue'
         />
