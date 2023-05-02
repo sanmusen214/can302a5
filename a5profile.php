@@ -110,6 +110,7 @@
                 <div class="mdui-col-xs-3">Shop_Logo:</div>
                 <div class="mdui-col-xs-9">
                     <img 
+                    id="img1"
                     style="max-witdth:300px;max-height:300px"
                     src="<?php echo $myrow['Shop_Logo'] ?>"
                     />
@@ -173,6 +174,11 @@
 <!-- 这个页面的JS，放在文档尾部 -->
 <script src="a5common/commonJS.js?<?php echo rand(1,999999) ?>"></script>
 <script>
-
+    window.addEventListener("load",function(){
+        // 图片url改变后立即变img里src
+        document.querySelector("#Shop_Logo").addEventListener("change",function(e){
+            document.querySelector("#img1").src=(e.target.value)
+        })
+    })
 </script>
 </html>

@@ -198,7 +198,9 @@
                 <!--Product_Image_link-->
                 <div class="mdui-col-xs-3">Product Image:</div>
                 <div class="mdui-col-xs-9">
-                    <img src=<?php echo $myrow["Product_Image_link"]?> alt="Product image" style='max-width: 300px;max-height: 200px'/>
+                    <img 
+                    id="imgbox1"
+                    src=<?php echo $myrow["Product_Image_link"]?> alt="Product image" style='max-width: 300px;max-height: 200px'/>
                     <?php
                         inputbox(array(
                             "name"=>"Product_Image_link",
@@ -233,6 +235,11 @@
     // 让Product_Name的input框只能填写不重复的产品名
     window.addEventListener("load",function(){
         itMustNotExist('Product_Name','product','Product_Name','<?php echo $myrow['Product_Name'] ?>')
+
+        // 图片url改变后立即变img里src
+        document.querySelector("#Product_Image_link").addEventListener("change",function(e){
+            document.querySelector("#imgbox1").src=(e.target.value)
+        })
     })
     
 </script>
