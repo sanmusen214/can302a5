@@ -150,7 +150,8 @@ if(isset($_POST['update'])){
                 inputbox(array(
                     "name"=>"Discount_Amount",
                     "defaultvalue"=>$myrow['Discount_Amount'],
-                    "required"=>true
+                    "required"=>true,
+                    "pattern"=>"^\d+(?:\.\d{1,2})?$"
                 ));
                 ?>
             </div>
