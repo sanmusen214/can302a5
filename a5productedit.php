@@ -48,7 +48,7 @@
             `Product_Category_ID` = '$productcategoryID',
             `Product_In_stock` = '$productInStock',
             `Product_Price` = '$productPrice',
-            `Product_Description` = '$productDescription',
+            `Product_Description` = \"$productDescription\",
             `Product_Image_link` = '$productImage' WHERE `Product_ID` = '$productID'
             ";
             $con->exec($sql);
@@ -61,7 +61,7 @@
             INSERT INTO `product` (`Product_ID`, `Product_Name`, `Product_Category_ID`, 
             `Product_In_stock`,`Product_Price`,`Product_Description`,`Product_Image_link`) 
             VALUES (NULL, '$productName','$productcategoryID','$productInStock',
-            '$productPrice','$productDescription','$productImage')
+            '$productPrice',\"$productDescription\",'$productImage')
             ";
             $con->exec($sql);
             // 网页跳转到

@@ -53,7 +53,7 @@ if(isset($_POST['update'])){
             `Order_Coupon_ID` = '$Order_Coupon_ID' ,
             `Order_Status` = '$Order_Status' ,
             `Order_Time` = '$Order_Time' ,
-            `Order_Details` = '$Order_Details' 
+            `Order_Details` = \"$Order_Details\" 
                    WHERE `Order_ID` = '$Order_ID'
             ";
     $con->exec($sql);
@@ -65,7 +65,7 @@ if(isset($_POST['update'])){
     //如果点击按钮值是create,插入新数据
     $sql = "
             INSERT INTO `orders` (`Order_ID`, `Order_Product_ID`, `Order_Customer_ID`,`Order_Coupon_ID`,`Order_Status`, `Order_Time`, `Order_Details`) 
-            VALUES (NULL, '$Order_Product_ID','$Order_Customer_ID','$Order_Coupon_ID', '$Order_Status', '$Order_Time', '$Order_Details')
+            VALUES (NULL, '$Order_Product_ID','$Order_Customer_ID','$Order_Coupon_ID', '$Order_Status', '$Order_Time', \"$Order_Details\")
             ";
     $con->exec($sql);
 

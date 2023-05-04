@@ -38,7 +38,7 @@
             UPDATE `category` SET 
             `Category_Name` = '$categoryName', 
             `Category_Status` = '$categoryStatus', 
-            `Description` = '$categoryDescription' WHERE `Category_ID` = '$categoryID'
+            `Description` = \"$categoryDescription\" WHERE `Category_ID` = '$categoryID'
             ";
             $con->exec($sql);
             // 网页跳转到
@@ -47,7 +47,7 @@
         }else if(isset($_POST['create'])){
             //如果点击按钮值是create,插入新数据
             $sql = "
-            INSERT INTO `category` (`Category_ID`, `Category_Name`, `Category_Status`,`Description`) VALUES (NULL, '$categoryName','$categoryStatus','$categoryDescription')
+            INSERT INTO `category` (`Category_ID`, `Category_Name`, `Category_Status`,`Description`) VALUES (NULL, '$categoryName','$categoryStatus',\"$categoryDescription\")
             ";
             $con->exec($sql);
             // 网页跳转到

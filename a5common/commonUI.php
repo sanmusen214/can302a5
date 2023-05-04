@@ -89,8 +89,14 @@
         ";
     }
 
-    // 选择框
-    // 传入时name和valuelist必填
+
+    /**
+     * 选择框
+     * @param config.name 必填，此input的name
+     * @param config.valuelist 必填，下拉选择框内容的值
+     * @param config.displaylist 下拉选择框内容的显示名
+     * @param config.defaultvalue 下拉选择框默认选取的内容的值
+     */
     function selectbox($config){
         $name=$config["name"];
         $displaylist=isset($config["displaylist"])?$config["displaylist"]:array();//可选，显示的名字

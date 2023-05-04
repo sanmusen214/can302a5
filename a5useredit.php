@@ -45,7 +45,7 @@
         `User_Name` = '$User_Name', 
         `Telephone` = '$Telephone', 
         `Payment_Method` = '$Payment_Method', 
-        `Shipping_Address` = '$Shipping_Address' WHERE `User_ID` = '$User_ID'
+        `Shipping_Address` = \"$Shipping_Address\" WHERE `User_ID` = '$User_ID'
         ";
         $con->exec($sql);
         // 网页跳转到
@@ -54,7 +54,7 @@
     }else if(isset($_POST['create'])){
         //如果点击按钮值是create,插入新数据
         $sql = "
-        INSERT INTO `user` (`User_ID`, `User_Name`, `Telephone`, `Payment_Method`, `Shipping_Address`) VALUES (NULL, '$User_Name', '$Telephone', '$Payment_Method','$Shipping_Address')";
+        INSERT INTO `user` (`User_ID`, `User_Name`, `Telephone`, `Payment_Method`, `Shipping_Address`) VALUES (NULL, '$User_Name', '$Telephone', '$Payment_Method',\"$Shipping_Address\")";
         $con->exec($sql);
         // 网页跳转到
         header("Location:./a5user.php");
