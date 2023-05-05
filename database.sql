@@ -84,6 +84,8 @@ CREATE TABLE `coupon` (
   `deleted` tinyint(1) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+INSERT INTO `coupon` (`Coupon_ID`, `Coupon_Name`, `Discount_Amount`, `Create_Time`, `Expire_Time`,`Coupon_Status`,`deleted`) VALUES
+(1, 'No coupon', '0', '2019-09-01 11:12:13', '2023-09-01 11:12:13','0','0');
 -- --------------------------------------------------------
 
 --
@@ -122,7 +124,7 @@ CREATE TABLE `product` (
 -- 转存表中的数据 `product`
 --
 
-INSERT INTO `product` (`Product_ID`, `Product_Name`, `Product_Category_ID`, `Product_In_stock`, `Product_Price`, `Product_Description`, `Product_Image_link`, `deleted`) VALUES (1, 'Apple IPhone 14', '3', '200', '100', 'Smartphone created by Apple', 'https://img0.baidu.com/it/u=4218582401,428653023&fm=253&fmt=auto&app=138&f=JPEG?w=1026&h=500', '0');;
+INSERT INTO `product` (`Product_ID`, `Product_Name`, `Product_Category_ID`, `Product_In_stock`, `Product_Price`, `Product_Description`, `Product_Image_link`, `deleted`) VALUES (1, 'Apple IPhone 14', '3', '200', '100', 'Smartphone created by Apple', 'https://img0.baidu.com/it/u=4218582401,428653023&fm=253&fmt=auto&app=138&f=JPEG?w=1026&h=500', '0');
 
 -- --------------------------------------------------------
 
@@ -231,7 +233,7 @@ ALTER TABLE `category`
 -- 使用表AUTO_INCREMENT `coupon`
 --
 ALTER TABLE `coupon`
-  MODIFY `Coupon_ID` int(16) NOT NULL AUTO_INCREMENT;
+  MODIFY `Coupon_ID` int(16) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- 使用表AUTO_INCREMENT `orders`
