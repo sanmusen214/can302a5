@@ -1,13 +1,13 @@
 # HOW TO RUN
 
-##
+## 部署
 
 1. 在电脑的xampp安装目录下的/htdocs文件夹内，执行git clone，此时文件夹结构为 /htdocs/can302a5
 2. 启动xampp的apache和mysql
 3. 在mysql的[admin页面](http://localhost/phpmyadmin/index.php?route=/server/sql)内，使用`database.sql`文件内的sql语句创建一个名为a5asm2的数据库以及其内的数据表。
 4. 访问[http://localhost/can302a5/](http://localhost/can302a5/)即可
 
-##
+## deploy
 
 1. Run `git clone https://github.com/sanmusen214/can302a5.git` in the folder `/htdocs` of XAMPP, which will make a folder structure like /htdocs/can302a5
 2. Run apache and mysql in XAMPP
